@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.cdzy.alatin.sync.http.DownloadOtherHttp" >
+    <http id="getDestination" resultType="String">
+         <!-- url固定 -->
+        <url><![CDATA[http://gys.lyq517.com/api/get_sp_tags?catg_id=%s&prod_id=0]]></url>
+        <!-- urlformat可传参数 eg:二级产品分类id -->
+        <urlformat value="routeInfo.getToCityId().split()[1]"/>
+        <!--  method固定 -->
+        <method>GET</method>
+        <!--  headers固定 -->
+        <headers>
+            <!--  <header key="Accept" value = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"/> -->
+            <!--  ajax固定 -->
+        </headers>
+        <ajax>true</ajax>
+    </http>
+    <http id="addRoute">
+    <!-- 新增行程 -->
+    <params>
+        <param key="product[mode]" value="1"/>
+        <param key="product[price_tpl][0]" value="成人"/>
+        <param key="product[price_tpl][1]" value="儿童"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <!--  一级产品分类id -->
+        <param key="product[pri_catg_id]" value="routeInfo.getToCityId().split()[0]"/> 
+        <!--     二级产品分类id routeInfo.getToCityId().split()[1]-->
+        <param key="product[catg_id]" value="routeInfo.getToCityId().split()[1]"/>
+    
+        <!--   for循环参数 -->
+        <!--     根据二级产品分类id获得目的地列表 -->
+        <param key="product[tempTags][0][tag_id]" value="4"/>
+        <param key="product[tempTags][0][name]" value="若尔盖草原"/>
+        <param key="product[tempTags][0][catg_id]" value="36"/>
+        <param key="product[tempTags][0][seq]" value="2"/>
+        <param key="product[tempTags][0][update_time]" value="2016-07-19 15:45:00"/>
+        <param key="product[tempTags][0][selected]" value="0"/>
+    
+        <param key="product[tempTags][0][tag_id]" value="5"/>
+        <param key="product[tempTags][0][name]" value="俄木唐"/>
+        <param key="product[tempTags][0][catg_id]" value="36"/>
+        <param key="product[tempTags][0][seq]" value="3"/>
+        <param key="product[tempTags][0][update_time]" value="2016-07-19 15:45:00"/>
+        <param key="product[tempTags][0][selected]" value="0"/>
+        
+    
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+    </params>
+    </http>
+</mapper>
