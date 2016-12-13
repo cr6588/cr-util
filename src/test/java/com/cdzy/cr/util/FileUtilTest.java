@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class FileUtilTest {
 
-  @Test
+//  @Test
   public void txtTest() {
       String testDataPath = this.getClass().getResource("").getPath() + "data" + File.separator + "txt.js";
       String txt = FileUtil.readFile2String(testDataPath); //此方法读取字符串有问题
@@ -31,4 +31,11 @@ public class FileUtilTest {
 
   }
 
+  @Test
+  public void readBigFileTest() {
+      String testDataPath = this.getClass().getResource("").getPath() + "data" + File.separator + "AllLog[2016-11-02].log";
+      Long time = System.currentTimeMillis();
+      FileUtil.readTxtFile2String(testDataPath);
+      System.out.println("String用时" + (System.currentTimeMillis() - time));
+  }
 }

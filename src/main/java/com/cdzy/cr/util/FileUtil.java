@@ -65,7 +65,6 @@ public class FileUtil {
             int len;
             while ((len = fis.read(chars)) != -1) {
                 String temp = new String(chars, 0, len);
-                str += temp;
             }
         } catch (Exception e) {
             e.printStackTrace();
