@@ -1,0 +1,102 @@
+<http id="getDestination">
+    <url><![CDATA[http://gys.lyq517.com/product/api_basic?step=1]]></url>
+    <headers>
+        <header key="Origin" value="http://gys.lyq517.com"/>
+        <header key="Accept-Encoding" value="gzip, deflate"/>
+        <header key="Host" value="gys.lyq517.com"/>
+        <header key="Accept-Language" value="zh-CN,zh;q=0.8,en;q=0.6,en-US;q=0.4"/>
+        <header key="User-Agent" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"/>
+        <header key="Content-Type" value="application/x-www-form-urlencoded;charset=UTF-8"/>
+        <header key="Accept" value="application/json, text/plain, */*"/>
+        <header key="Referer" value="http://gys.lyq517.com/Product/edit/id/1431.html"/>
+        <header key="X-Requested-With" value="XMLHttpRequest"/>
+        <header key="Connection" value="keep-alive"/>
+        <header key="Content-Length" value="3701"/>
+        <header key="DNT" value="1"/>
+    </headers>
+    <method>POST</method>
+    <params>
+        <param key="product[id]" value="1431"/>
+        <param key="product[sp_id]" value="4310"/>
+        <param key="product[status]" value="1"/>
+        <param key="product[mode]" value="1"/>
+        <param key="product[no]" value="160718F96F"/>
+        <param key="product[catg_id]" value="28"/>
+        <param key="product[pri_catg_id]" value="5"/>
+        <param key="product[price_tpl][0]" value="成人"/>
+        <param key="product[price_tpl][1]" value="儿童"/>
+        <param key="product[price_tpl][2]" value="幼儿"/>
+        <param key="product[title]" value="首尔济州7日游"/>
+        <param key="product[indexpic]" value="/Public/uploadfile/file/2016-07-18/578c7c5d703c1.jpg"/>
+        <param key="product[duration]" value="7"/>
+        <param key="product[srp]" value="0"/>
+        <param key="product[place_depart]" value="成都"/>
+        <param key="product[place_gather]" value="双流机场"/>
+        <param key="product[sold]" value="0"/>
+        <param key="product[hits]" value="0"/>
+        <param key="product[addtime]" value="2016-07-18 14:44:13"/>
+        <param key="product[row_version]" value="20"/>
+        <param key="product[lasttime]" value="0"/>
+        <param key="product[gathertimes]" value="0"/>
+        <param key="product[managed_by]" value="4021"/>
+        <param key="product[create_by]" value="4021"/>
+        <param key="product[deadline]" value="7"/>
+        <param key="product[update_time]" value="2016-12-12 16:42:51"/>
+        <param key="product[tempTags][0][tag_id]" value="182"/>
+        <param key="product[tempTags][0][name]" value="东京"/>
+        <param key="product[tempTags][0][catg_id]" value="28"/>
+        <param key="product[tempTags][0][selected]" value="0"/>
+        <param key="product[tempTags][1][tag_id]" value="194"/>
+        <param key="product[tempTags][1][name]" value="仁川"/>
+        <param key="product[tempTags][1][catg_id]" value="28"/>
+        <param key="product[tempTags][1][selected]" value="0"/>
+        <param key="product[tempTags][2][tag_id]" value="193"/>
+        <param key="product[tempTags][2][name]" value="江原道"/>
+        <param key="product[tempTags][2][catg_id]" value="28"/>
+        <param key="product[tempTags][2][selected]" value="0"/>
+        <param key="product[tempTags][3][tag_id]" value="192"/>
+        <param key="product[tempTags][3][name]" value="济州岛"/>
+        <param key="product[tempTags][3][catg_id]" value="28"/>
+        <param key="product[tempTags][3][selected]" value="1"/>
+        <param key="product[tempTags][4][tag_id]" value="191"/>
+        <param key="product[tempTags][4][name]" value="首尔"/>
+        <param key="product[tempTags][4][catg_id]" value="28"/>
+        <param key="product[tempTags][4][selected]" value="0"/>
+        <param key="product[tempTags][5][tag_id]" value="190"/>
+        <param key="product[tempTags][5][name]" value="神户"/>
+        <param key="product[tempTags][5][catg_id]" value="28"/>
+        <param key="product[tempTags][5][selected]" value="0"/>
+        <param key="product[tempTags][6][tag_id]" value="189"/>
+        <param key="product[tempTags][6][name]" value="长崎"/>
+        <param key="product[tempTags][6][catg_id]" value="28"/>
+        <param key="product[tempTags][6][selected]" value="0"/>
+        <param key="product[tempTags][7][tag_id]" value="188"/>
+        <param key="product[tempTags][7][name]" value="熊本"/>
+        <param key="product[tempTags][7][catg_id]" value="28"/>
+        <param key="product[tempTags][7][selected]" value="0"/>
+        <param key="product[tempTags][8][tag_id]" value="187"/>
+        <param key="product[tempTags][8][name]" value="福冈"/>
+        <param key="product[tempTags][8][catg_id]" value="28"/>
+        <param key="product[tempTags][8][selected]" value="0"/>
+        <param key="product[tempTags][9][tag_id]" value="186"/>
+        <param key="product[tempTags][9][name]" value="冲绳"/>
+        <param key="product[tempTags][9][catg_id]" value="28"/>
+        <param key="product[tempTags][9][selected]" value="0"/>
+        <param key="product[tempTags][10][tag_id]" value="185"/>
+        <param key="product[tempTags][10][name]" value="北海道"/>
+        <param key="product[tempTags][10][catg_id]" value="28"/>
+        <param key="product[tempTags][10][selected]" value="0"/>
+        <param key="product[tempTags][11][tag_id]" value="184"/>
+        <param key="product[tempTags][11][name]" value="京都"/>
+        <param key="product[tempTags][11][catg_id]" value="28"/>
+        <param key="product[tempTags][11][selected]" value="0"/>
+        <param key="product[tempTags][12][tag_id]" value="183"/>
+        <param key="product[tempTags][12][name]" value="大阪"/>
+        <param key="product[tempTags][12][catg_id]" value="28"/>
+        <param key="product[tempTags][12][selected]" value="0"/>
+        <param key="product[tempTags][13][tag_id]" value="276"/>
+        <param key="product[tempTags][13][name]" value="岗山"/>
+        <param key="product[tempTags][13][catg_id]" value="28"/>
+        <param key="product[tempTags][13][selected]" value="0"/>
+    </params>
+</http>

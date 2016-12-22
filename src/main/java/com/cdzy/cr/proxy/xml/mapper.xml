@@ -1,71 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mapper namespace="com.cdzy.alatin.sync.http.DownloadOtherHttp" >
-    <http id="getDestination" resultType="String">
-         <!-- url固定 -->
+<!-- 一个mapper节点只有一个，namespace对应一个接口完整名称 -->
+<mapper namespace="com.cdzy.alatin.sync.buiness.http.DownloadOtherHttp" >
+
+    <!--  一个http节点对应一个请求，id对应接口名称，resultType对应返回类型，目前只有字符串 -->
+    <http id="getDestination">
+        <!-- url固定 -->
         <url><![CDATA[http://gys.lyq517.com/api/get_sp_tags?catg_id=%s&prod_id=0]]></url>
-        <!-- urlformat可传参数 eg:二级产品分类id -->
-        <urlformat value="routeInfo.getToCityId().split()[1]"/>
+        <!--         url需要替换加入,key自己定义，value一定要是一个list结构<urlformat>#{}</urlformat> -->
+        <urlformat>#{urlformat}</urlformat>
         <!--  method固定 -->
         <method>GET</method>
-        <!--  headers固定 -->
+        <!--  headers固定,不传使用默认的请求头 -->
+<!--         <headers> -->
+<!--             默认值传统使用<header key="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"/> -->
+<!--             json传输使用<header key="Accept" value="application/json, text/javascript, */*; q=0.01"/> -->
+<!--             默认值<header key="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36"/> -->
+<!--             默认值<header key="Accept-Encoding" value="gzip,deflate"/> -->
+<!--             默认值<header key="Accept-Language" value="en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4"/> -->
+<!--             默认值<header key="Accept-Charset" value="utf-8;q=0.7,*;q=0.7"/> -->
+<!--             默认值<header key="Cache-Control" value="no-cache"/> -->
+<!--             默认不含有<header key="X-Requested-With" value="XMLHttpRequest"/> -->
+<!--         </headers> -->
+        <params>
+            <if test="publish_time != null and publish_time != ''">
+                <param key="product[publish_time]" value="#{publish_time}"/>
+            </if>
+        </params>
+
+    </http>
+
+    <!-- 新增行程 -->
+    <http id="addRoute">
+    <!--     params对应网站参数 -->
+        <params >
+            <param key="product[mode]" value="1"/>
+            <param key="product[price_tpl][0]" value="成人"/>
+            <param key="product[price_tpl][1]" value="儿童"/>
+            <param key="product[price_tpl][2]" value="幼儿"/>
+            <!--  一级产品分类id -->
+            <param key="product[pri_catg_id]" value="routeInfo.getToCityId().split()[0]"/> 
+            <!--     二级产品分类id routeInfo.getToCityId().split()[1]-->
+            <param key="product[catg_id]" value="routeInfo.getToCityId().split()[1]"/>
+            <!--   for循环参数 -->
+            <!--     根据二级产品分类id获得目的地列表 -->
+            <param key="product[tempTags][0][tag_id]" value="4"/>
+            <param key="product[tempTags][0][name]" value="若尔盖草原"/>
+            <param key="product[tempTags][0][catg_id]" value="36"/>
+            <param key="product[tempTags][0][seq]" value="2"/>
+            <param key="product[tempTags][0][update_time]" value="2016-07-19 15:45:00"/>
+            <param key="product[tempTags][0][selected]" value="0"/>
+        
+            <param key="product[tempTags][0][tag_id]" value="5"/>
+            <param key="product[tempTags][0][name]" value="俄木唐"/>
+            <param key="product[tempTags][0][catg_id]" value="36"/>
+            <param key="product[tempTags][0][seq]" value="3"/>
+            <param key="product[tempTags][0][update_time]" value="2016-07-19 15:45:00"/>
+            <param key="product[tempTags][0][selected]" value="0"/>
+        </params>
+    </http>
+
+    <!-- 修改行程 ,resEncode为响应解析编码，默认使用UTF-8-->
+    <http id="updRoute" resEncode="UTF-8">
+        <!-- url固定 -->
+        <url><![CDATA[http://gys.lyq517.com/product/api_basic?step=1]]></url>
+        <!--  method固定 -->
+        <method>POST</method>
+        <!--  headers固定,不传使用默认的请求头 -->
         <headers>
             <!--  <header key="Accept" value = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"/> -->
-            <!--  ajax固定 -->
         </headers>
+        <!--  使用了headers之后ajax节点无效，因为ajax本来就是辅助设置header,ajax固定，不传默认不是ajax请求 -->
         <ajax>true</ajax>
-    </http>
-    <http id="addRoute">
-    <!-- 新增行程 -->
-    <params>
-        <param key="product[mode]" value="1"/>
-        <param key="product[price_tpl][0]" value="成人"/>
-        <param key="product[price_tpl][1]" value="儿童"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <!--  一级产品分类id -->
-        <param key="product[pri_catg_id]" value="routeInfo.getToCityId().split()[0]"/> 
-        <!--     二级产品分类id routeInfo.getToCityId().split()[1]-->
-        <param key="product[catg_id]" value="routeInfo.getToCityId().split()[1]"/>
-    
-        <!--   for循环参数 -->
-        <!--     根据二级产品分类id获得目的地列表 -->
-        <param key="product[tempTags][0][tag_id]" value="4"/>
-        <param key="product[tempTags][0][name]" value="若尔盖草原"/>
-        <param key="product[tempTags][0][catg_id]" value="36"/>
-        <param key="product[tempTags][0][seq]" value="2"/>
-        <param key="product[tempTags][0][update_time]" value="2016-07-19 15:45:00"/>
-        <param key="product[tempTags][0][selected]" value="0"/>
-    
-        <param key="product[tempTags][0][tag_id]" value="5"/>
-        <param key="product[tempTags][0][name]" value="俄木唐"/>
-        <param key="product[tempTags][0][catg_id]" value="36"/>
-        <param key="product[tempTags][0][seq]" value="3"/>
-        <param key="product[tempTags][0][update_time]" value="2016-07-19 15:45:00"/>
-        <param key="product[tempTags][0][selected]" value="0"/>
-        
-    
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-        <param key="product[price_tpl][2]" value="幼儿"/>
-    </params>
+        <!--     params对应网站参数，encode="UTF-8"，encode默认值UTF-8，可以不设置 -->
+        <params encode="UTF-8">
+            <param key="product[sp_id]" value="4310"/>
+            <param key="product[status]" value="1"/>
+            <param key="product[mode]" value="1"/>
+            <param key="product[no]" value="160718F96F"/>
+            <param key="product[catg_id]" value="28"/>
+            <param key="product[pri_catg_id]" value="5"/>
+            <param key="product[price_tpl][0]" value="成人"/>
+            <param key="product[price_tpl][1]" value="儿童"/>
+            <param key="product[price_tpl][2]" value="幼儿"/>
+            <param key="product[title]" value="首尔济州7日游"/>
+            <param key="product[indexpic]" value="/Public/uploadfile/file/2016-07-18/578c7c5d703c1.jpg"/>
+            <param key="product[duration]" value="7"/>
+            <param key="product[srp]" value="0"/>
+            <param key="product[place_depart]" value="成都"/>
+            <param key="product[place_gather]" value="双流机场"/>
+            <param key="product[sold]" value="0"/>
+            <param key="product[hits]" value="0"/>
+            <param key="product[addtime]" value="2016-07-18 14:44:13"/>
+            <param key="product[row_version]" value="20"/>
+            <param key="product[lasttime]" value="0"/>
+            <param key="product[gathertimes]" value="0"/>
+            <param key="product[managed_by]" value="4021"/>
+            <param key="product[create_by]" value="4021"/>
+            <param key="product[deadline]" value="7"/>
+            <param key="product[update_time]" value="2016-12-12 16:42:51"/>
+            <if test="publish_time != null and publish_time != ''">
+                <param key="product[publish_time]" value="#{publish_time}"/>
+            </if>
+            <!-- index的value不要出现与key相同的字符 -->
+            <foreach collection="roles" item="role" index="index">
+                <param key="product[tempTags][index][tag_id]" value="#{role.tag_id}"/>
+                <param key="product[tempTags][index][name]" value="#{role.name}"/>
+                <param key="product[tempTags][index][catg_id]" value="#{role.catg_id}"/>
+                <if test="tag_id == role.tag_id">
+                    <param key="product[tempTags][index][selected]" value="1"/>
+                </if>
+                <if test="tag_id != role.tag_id">
+                    <param key="product[tempTags][index][selected]" value="0"/>
+                </if>
+            </foreach>
+        </params>
     </http>
 </mapper>
