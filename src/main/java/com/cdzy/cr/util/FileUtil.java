@@ -3,7 +3,10 @@ package com.cdzy.cr.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileUtil {
     /**
@@ -65,6 +68,7 @@ public class FileUtil {
             int len;
             while ((len = fis.read(chars)) != -1) {
                 String temp = new String(chars, 0, len);
+                str += temp;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -150,5 +154,39 @@ public class FileUtil {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * 文件后缀过滤
+     *
+     */
+    static class FileSuffixFilter implements FilenameFilter {
+        private String suffix;
+        FileSuffixFilter(String suffix) {
+            this.suffix = suffix;
+        }
+        @Override
+        public boolean accept(File dir, String name) {
+            return name.endsWith(suffix);
+        }
+    }
+
+    /**
+     * 获取指定路径下的指定文件名后缀
+     * @param path
+     * @param suffix
+     * @return
+     */
+    public static List<File> getFilesBySuffix(String path, String suffix) {
+        File[] files = new File(path).listFiles(new FileSuffixFilter(suffix));
+        List<File> listFile = new ArrayList<File>();
+        for (File file : files) {
+            if(file.isFile()) {
+                listFile.add(file);
+            } else if (file.isDirectory()) {
+                listFile.addAll(getFilesBySuffix(file.getPath(), suffix));
+            }
+        }
+        return listFile;
     }
 }
