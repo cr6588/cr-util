@@ -6,7 +6,10 @@ import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class FileUtil {
     /**
@@ -172,7 +175,7 @@ public class FileUtil {
     }
 
     /**
-     * 获取指定路径下的指定文件名后缀
+     * 获取指定路径下的指定后缀的文件
      * @param path
      * @param suffix
      * @return
@@ -188,5 +191,39 @@ public class FileUtil {
             }
         }
         return listFile;
+    }
+
+    /**
+     * 获取jar包中指定后缀的文件
+     * @param jarPath
+     * @param suffix
+     * @return
+     */
+    @SuppressWarnings("resource")
+    public static List<JarEntry> getJarEntiesBySuffix(String jarPath, String suffix) {
+        JarFile xmlFile = null;
+        try {
+            xmlFile = new JarFile(jarPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Enumeration<JarEntry> Enumeration = xmlFile.entries();
+        List<JarEntry> jarEntries = new ArrayList<JarEntry>();
+        for (;Enumeration.hasMoreElements();) {
+            JarEntry entry = Enumeration.nextElement();
+            if(entry.getName().endsWith(suffix)) {
+                jarEntries.add(entry);
+            }
+        }
+        return jarEntries.size() == 0 ? null : jarEntries;
+    }
+
+    /**
+     * 获取指定类的根路径，jar包中返回的jar包文件所在路径
+     * @param clazz
+     * @return
+     */
+    public static <T> String getRootPath(Class<T> clazz) {
+        return clazz.getProtectionDomain().getCodeSource().getLocation().getPath();
     }
 }

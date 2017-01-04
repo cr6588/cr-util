@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import ognl.Ognl;
 import ognl.OgnlContext;
@@ -50,17 +52,20 @@ public class MapperProxy implements InvocationHandler {
         Element rootElement = document.getRootElement();
         SyncSession session = null;
         if (args != null) {
-            //从方法参数中找出session
+            //从方法参数中找出session, map
+            Map<String, Object> map = null;
             for (Object arg : args) {
                 if (arg instanceof SyncSession) {
                     session = (SyncSession) arg;
+                }
+                if (arg instanceof Map) {
+                    map = (HashMap<String, Object>) arg;
                 }
             }
             if(session == null) {
                 throw new Throwable(method.getName() + "的参数中没有session");
             }
             //获取适用于xml中的参数map
-            Map<String, Object> httpArg = (HashMap<String, Object>) args[0];
             if (rootElement.elements("http") != null) {
                 List<Element> https = rootElement.elements("http");
                 for (Element http : https) {
@@ -81,11 +86,11 @@ public class MapperProxy implements InvocationHandler {
                                 if(mapKey == null || mapKey.equals("")) {
                                     throw new Throwable("urlformat的值去除#{}后为空");
                                 }
-                                if(httpArg.get(mapKey) instanceof String) {
-                                    String urlformat = (String) httpArg.get(getKeyByXMLValue(urlformatXMLValue));
+                                if(map.get(mapKey) instanceof String) {
+                                    String urlformat = (String) map.get(getKeyByXMLValue(urlformatXMLValue));
                                     url = String.format(url, urlformat);
-                                } else if (httpArg.get(getKeyByXMLValue(urlformatXMLValue)) instanceof String[]) {
-                                    String[] urlformat = (String[]) httpArg.get(getKeyByXMLValue(urlformatXMLValue));
+                                } else if (map.get(getKeyByXMLValue(urlformatXMLValue)) instanceof String[]) {
+                                    String[] urlformat = (String[]) map.get(getKeyByXMLValue(urlformatXMLValue));
                                     url = String.format(url, urlformat);
                                 } else {
                                     throw new Throwable("参数map中" + mapKey + "的值既不是字符串也不是字符串数组");
@@ -95,7 +100,7 @@ public class MapperProxy implements InvocationHandler {
                             }
                         }
                         //解析params
-                        List<BasicNameValuePair> paramsBasicNameValuePairs = null;
+                        List<BasicNameValuePair> paramsBasicNameValuePairs = new ArrayList<BasicNameValuePair>();
                         String paramsEncode = UTF8;
                         if (http.element("params") != null) {
                             if(http.element("params").attribute("encode") != null) {
@@ -104,16 +109,9 @@ public class MapperProxy implements InvocationHandler {
                             //params下直系param节点
                             List<Element> paramsHttp = http.element("params").elements("param");
                             if (paramsHttp != null) {
-                                paramsBasicNameValuePairs = new ArrayList<BasicNameValuePair>();
                                 for (Element paramHttp : paramsHttp) {
-                                    String paramValue = paramHttp.attributeValue("value");
-                                    if (paramValue.trim().startsWith("#{") && paramValue.trim().endsWith("}")) {
-                                        String httpArgKey = getKeyByXMLValue(paramValue);
-                                        String httpArgValue = httpArg.get(httpArgKey).toString();
-                                        paramsBasicNameValuePairs.add(new BasicNameValuePair(paramHttp.attributeValue("key"), httpArgValue));
-                                    } else {
-                                        paramsBasicNameValuePairs.add(new BasicNameValuePair(paramHttp.attributeValue("key"), paramValue));
-                                    }
+                                    String xmlValue = paramHttp.attributeValue("value");
+                                    paramsBasicNameValuePairs.add(new BasicNameValuePair(paramHttp.attributeValue("key"), getValue(map, xmlValue)));
                                 }
                             }
                             //params下直系if节点
@@ -121,26 +119,15 @@ public class MapperProxy implements InvocationHandler {
                             if(ifElements != null) {
                                 for (Element ifElement : ifElements) {
                                     String express = ifElement.attributeValue("test");
-                                    try {
-                                        boolean result = (boolean)parseOgnlExpress(httpArg, express);
-                                        if(!result) {
-                                            continue;
-                                        }
-                                    } catch (Exception e) {
-                                        logger.error("if 标签表达式：" + express + "解析出错");
-                                        
+                                    boolean result = (boolean) parseOgnlExpress(map, express);
+                                    if(!result) {
+                                        continue;
                                     }
                                     List<Element> paramElements = ifElement.elements("param");
                                     if(paramElements != null) {
                                         for (Element paramElement : paramElements) {
-                                            String paramElementValue = paramElement.attributeValue("value");
-                                            if (paramElementValue.trim().startsWith("#{") && paramElementValue.trim().endsWith("}")) {
-                                                String httpArgKey = getKeyByXMLValue(paramElementValue);
-                                                String httpArgValue = httpArg.get(httpArgKey).toString();
-                                                paramsBasicNameValuePairs.add(new BasicNameValuePair(paramElement.attributeValue("key"), httpArgValue));
-                                            } else {
-                                                paramsBasicNameValuePairs.add(new BasicNameValuePair(paramElement.attributeValue("key"), paramElementValue));
-                                            }
+                                            String xmlValue = paramElement.attributeValue("value");
+                                            paramsBasicNameValuePairs.add(new BasicNameValuePair(paramElement.attributeValue("key"), getValue(map, xmlValue)));
                                         }
                                     }
                                 }
@@ -150,7 +137,7 @@ public class MapperProxy implements InvocationHandler {
                             if(forElements != null) {
                                 for (Element forElement : forElements) { //foreach标签循环
                                     String collection = forElement.attributeValue("collection");
-                                    List list = (List) httpArg.get(collection);
+                                    List list = (List) map.get(collection);
                                     if(list == null) {
                                         continue;
                                     }
@@ -170,9 +157,9 @@ public class MapperProxy implements InvocationHandler {
                                                     String httpArgKey = getKeyByXMLValue(value);
                                                     String httpArgValue = "";
                                                     if(httpArgKey != null && httpArgKey.contains(".")) { //如果#{}里面的内容是含有item.xx时
-                                                        httpArgValue = (String) parseOgnlExpress(httpArg, collection + "[" + i + "]" + httpArgKey.substring(httpArgKey.indexOf(".")));
+                                                        httpArgValue = (String) parseOgnlExpress(map, collection + "[" + i + "]" + httpArgKey.substring(httpArgKey.indexOf(".")));
                                                     } else { //如果直接取map中的参数没有.
-                                                        httpArgValue = (String) httpArg.get(httpArgKey);
+                                                        httpArgValue = (String) map.get(httpArgKey);
                                                     }
                                                     paramsBasicNameValuePairs.add(new BasicNameValuePair(key, httpArgValue));
                                                 } else {
@@ -180,7 +167,7 @@ public class MapperProxy implements InvocationHandler {
                                                 }
                                             }
                                         }
-                                      //foreach下直系if节点
+                                        //foreach下直系if节点
                                         List<Element> ifElementsInFor = forElement.elements("if");
                                         if(ifElementsInFor != null) {
                                             for (Element ifElement : ifElementsInFor) {
@@ -189,7 +176,7 @@ public class MapperProxy implements InvocationHandler {
                                                     express = express.replace(item + ".", collection + "[" + i + "].");
                                                 }
                                                 try {
-                                                    boolean result = (boolean)parseOgnlExpress(httpArg, express);
+                                                    boolean result = (boolean)parseOgnlExpress(map, express);
                                                     if(!result) {
                                                         continue;
                                                     }
@@ -208,9 +195,9 @@ public class MapperProxy implements InvocationHandler {
                                                             String httpArgKey = getKeyByXMLValue(value);
                                                             String httpArgValue = "";
                                                             if(httpArgKey != null && httpArgKey.contains(".")) { //如果#{}里面的内容是含有item.xx时
-                                                                httpArgValue = (String) parseOgnlExpress(httpArg, collection + "[" + i + "]" + httpArgKey.substring(httpArgKey.indexOf(".")));
+                                                                httpArgValue = (String) parseOgnlExpress(map, collection + "[" + i + "]" + httpArgKey.substring(httpArgKey.indexOf(".")));
                                                             } else { //如果直接取map中的参数没有.
-                                                                httpArgValue = (String) httpArg.get(httpArgKey);
+                                                                httpArgValue = (String) map.get(httpArgKey);
                                                             }
                                                             paramsBasicNameValuePairs.add(new BasicNameValuePair(key, httpArgValue));
                                                         } else {
@@ -224,6 +211,7 @@ public class MapperProxy implements InvocationHandler {
                                 }
                             }
                         }
+                        //TODO 测试通过后需要删除
                         if (paramsBasicNameValuePairs != null && paramsBasicNameValuePairs.size() != 0) {
                             for (BasicNameValuePair paramsBasicNameValuePair : paramsBasicNameValuePairs) {
                                 System.out.println("key:" + paramsBasicNameValuePair.getName() + "-----------value:" + paramsBasicNameValuePair.getValue());
@@ -232,6 +220,7 @@ public class MapperProxy implements InvocationHandler {
                                 return null;
                             }
                         }
+
                         //解析method
                         String methodHttp = http.element("method").getText();
                         HttpUriRequest request = null;
@@ -273,6 +262,22 @@ public class MapperProxy implements InvocationHandler {
             }
         }
         return null;
+    }
+
+    /**
+     * 获取xml中value代表的值
+     * @param map
+     * @param xmlValue
+     * @return 如果xml value中有#{}则返回map中的值，无则返回xmlValue
+     */
+    public String getValue(Map<String, Object> map, String xmlValue) {
+        if (xmlValue.trim().startsWith("#{") && xmlValue.trim().endsWith("}")) {
+            String key = getKeyByXMLValue(xmlValue);
+            String value = map.get(key).toString();
+            return value;
+        } else {
+            return xmlValue;
+        }
     }
 
     /**
@@ -323,30 +328,48 @@ public class MapperProxy implements InvocationHandler {
      * @param o
      * @return
      */
+    @SuppressWarnings("resource")
     public static <T> T getHttpInstance(Class<T> clazz, Object o) {
         if (o == null) {
-            String curPath = clazz.getResource("").getPath();
-            // 获取class所在包下的xml文件
-            List<File> files = FileUtil.getFilesBySuffix(curPath, "xml");
-            if (files == null || files.size() == 0) {
-                logger.error(curPath + "路径下没有xml文件");
-                return null;
-            }
-            for (File file : files) {
-                InputStream inputStream = null;
+            String jarPath = FileUtil.getRootPath(clazz);
+            //测试时xml文件在target-class的http接口所在目录中，但实际运行时是在jar包中所以了获取xml文件分成2种方式
+            if(new File(jarPath).isFile()) { //如果是在jar包中
+                List<JarEntry> jarEnties = null;
+                // 获取class所在包下的xml文件
+                jarEnties = FileUtil.getJarEntiesBySuffix(jarPath, "xml");
+                if (jarEnties == null || jarEnties.size() == 0) {
+                    logger.error(jarPath + "路径下没有xml文件");
+                    return null;
+                }
+                JarFile jarFile = null;
                 try {
-                    inputStream = new FileInputStream(file);
-                    SAXReader saxReader = new SAXReader();
-                    Document document = saxReader.read(inputStream);
-                    Element rootElement = document.getRootElement();
-                    if (clazz.getName().equals(rootElement.attributeValue("namespace"))) {
-                        return MapperProxy.newMapperProxy(clazz, document);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
+                    jarFile = new JarFile(jarPath);
+                } catch (IOException e) {
+                    return null;
+                }
+                for (JarEntry jarEntry : jarEnties) {
                     try {
-                        inputStream.close();
+                        T t = getInstanceByInputStream(clazz, jarFile.getInputStream(jarEntry));
+                        if(t != null) {
+                            return t;
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                String packagePath = clazz.getResource("").getPath();
+                List<File> files = FileUtil.getFilesBySuffix(packagePath, "xml");
+                if (files == null || files.size() == 0) {
+                    logger.error(packagePath + "路径下没有xml文件");
+                    return null;
+                }
+                for (File file : files) {
+                    try {
+                        T t = getInstanceByInputStream(clazz, new FileInputStream(file));
+                        if(t != null) {
+                            return t;
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -354,6 +377,26 @@ public class MapperProxy implements InvocationHandler {
             }
         }
         logger.error(clazz.getName() + "的实例生成失败，请检查是否有与其对应的xml文件");
+        return null;
+    }
+
+    public static <T> T getInstanceByInputStream(Class<T> clazz, InputStream inputStream) {
+        try {
+            SAXReader saxReader = new SAXReader();
+            Document document = saxReader.read(inputStream);
+            Element rootElement = document.getRootElement();
+            if (clazz.getName().equals(rootElement.attributeValue("namespace"))) {
+                return MapperProxy.newMapperProxy(clazz, document);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 
