@@ -73,7 +73,7 @@
         <ajax>true</ajax>
         <!--     params对应网站参数，encode="UTF-8"，encode默认值UTF-8，可以不设置 -->
         <params encode="UTF-8">
-            <param key="product[sp_id]" value="4310"/>
+            <param key="product[sp_id]" value="4310" />
             <param key="product[status]" value="1"/>
             <param key="product[mode]" value="1"/>
             <param key="product[no]" value="160718F96F"/>
