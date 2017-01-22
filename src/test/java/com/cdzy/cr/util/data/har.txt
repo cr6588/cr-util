@@ -1,0 +1,1244 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [],
+    "entries": [
+      {
+        "startedDateTime": "2016-12-15T06:56:23.364Z",
+        "time": 161.13000037148595,
+        "request": {
+          "method": "POST",
+          "url": "http://gys.lyq517.com/product/api_basic?step=1",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "PHPSESSID=0ekkoihu1k73n6budtf46gob24"
+            },
+            {
+              "name": "Origin",
+              "value": "http://gys.lyq517.com"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate"
+            },
+            {
+              "name": "Host",
+              "value": "gys.lyq517.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "zh-CN,zh;q=0.8,en;q=0.6,en-US;q=0.4"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/x-www-form-urlencoded;charset=UTF-8"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "name": "Referer",
+              "value": "http://gys.lyq517.com/Product/edit/id/1431.html"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "name": "Content-Length",
+              "value": "3701"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "step",
+              "value": "1"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "PHPSESSID",
+              "value": "0ekkoihu1k73n6budtf46gob24",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 608,
+          "bodySize": 3701,
+          "postData": {
+            "mimeType": "application/x-www-form-urlencoded;charset=UTF-8",
+            "text": "product%5Bid%5D=1431&product%5Bsp_id%5D=4310&product%5Bstatus%5D=1&product%5Bmode%5D=1&product%5Bno%5D=160718F96F&product%5Bcatg_id%5D=28&product%5Bpri_catg_id%5D=5&product%5Bprice_tpl%5D%5B0%5D=%E6%88%90%E4%BA%BA&product%5Bprice_tpl%5D%5B1%5D=%E5%84%BF%E7%AB%A5&product%5Bprice_tpl%5D%5B2%5D=%E5%B9%BC%E5%84%BF&product%5Btitle%5D=%E9%A6%96%E5%B0%94%E6%B5%8E%E5%B7%9E7%E6%97%A5%E6%B8%B8&product%5Bindexpic%5D=%2FPublic%2Fuploadfile%2Ffile%2F2016-07-18%2F578c7c5d703c1.jpg&product%5Bduration%5D=7&product%5Bsrp%5D=0&product%5Bplace_depart%5D=%E6%88%90%E9%83%BD&product%5Bplace_gather%5D=%E5%8F%8C%E6%B5%81%E6%9C%BA%E5%9C%BA&product%5Bsold%5D=0&product%5Bhits%5D=0&&&product%5Baddtime%5D=2016-07-18%2014%3A44%3A13&&&&&&product%5Brow_version%5D=20&&product%5Blasttime%5D=0&product%5Bgathertimes%5D=0&product%5Bmanaged_by%5D=4021&product%5Bcreate_by%5D=4021&product%5Bdeadline%5D=7&product%5Bupdate_time%5D=2016-12-12%2016%3A42%3A51&&&&&product%5BtempTags%5D%5B0%5D%5Btag_id%5D=182&product%5BtempTags%5D%5B0%5D%5Bname%5D=%E4%B8%9C%E4%BA%AC&product%5BtempTags%5D%5B0%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B0%5D%5Bselected%5D=0&&product%5BtempTags%5D%5B1%5D%5Btag_id%5D=194&product%5BtempTags%5D%5B1%5D%5Bname%5D=%E4%BB%81%E5%B7%9D&product%5BtempTags%5D%5B1%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B1%5D%5Bselected%5D=0&&product%5BtempTags%5D%5B2%5D%5Btag_id%5D=193&product%5BtempTags%5D%5B2%5D%5Bname%5D=%E6%B1%9F%E5%8E%9F%E9%81%93&product%5BtempTags%5D%5B2%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B2%5D%5Bselected%5D=0&&product%5BtempTags%5D%5B3%5D%5Btag_id%5D=192&product%5BtempTags%5D%5B3%5D%5Bname%5D=%E6%B5%8E%E5%B7%9E%E5%B2%9B&product%5BtempTags%5D%5B3%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B3%5D%5Bselected%5D=1&&product%5BtempTags%5D%5B4%5D%5Btag_id%5D=191&product%5BtempTags%5D%5B4%5D%5Bname%5D=%E9%A6%96%E5%B0%94&product%5BtempTags%5D%5B4%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B4%5D%5Bselected%5D=0&&product%5BtempTags%5D%5B5%5D%5Btag_id%5D=190&product%5BtempTags%5D%5B5%5D%5Bname%5D=%E7%A5%9E%E6%88%B7&product%5BtempTags%5D%5B5%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B5%5D%5Bselected%5D=0&&product%5BtempTags%5D%5B6%5D%5Btag_id%5D=189&product%5BtempTags%5D%5B6%5D%5Bname%5D=%E9%95%BF%E5%B4%8E&product%5BtempTags%5D%5B6%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B6%5D%5Bselected%5D=0&&product%5BtempTags%5D%5B7%5D%5Btag_id%5D=188&product%5BtempTags%5D%5B7%5D%5Bname%5D=%E7%86%8A%E6%9C%AC&product%5BtempTags%5D%5B7%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B7%5D%5Bselected%5D=0&&product%5BtempTags%5D%5B8%5D%5Btag_id%5D=187&product%5BtempTags%5D%5B8%5D%5Bname%5D=%E7%A6%8F%E5%86%88&product%5BtempTags%5D%5B8%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B8%5D%5Bselected%5D=0&&product%5BtempTags%5D%5B9%5D%5Btag_id%5D=186&product%5BtempTags%5D%5B9%5D%5Bname%5D=%E5%86%B2%E7%BB%B3&product%5BtempTags%5D%5B9%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B9%5D%5Bselected%5D=0&&product%5BtempTags%5D%5B10%5D%5Btag_id%5D=185&product%5BtempTags%5D%5B10%5D%5Bname%5D=%E5%8C%97%E6%B5%B7%E9%81%93&product%5BtempTags%5D%5B10%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B10%5D%5Bselected%5D=0&&product%5BtempTags%5D%5B11%5D%5Btag_id%5D=184&product%5BtempTags%5D%5B11%5D%5Bname%5D=%E4%BA%AC%E9%83%BD&product%5BtempTags%5D%5B11%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B11%5D%5Bselected%5D=0&&product%5BtempTags%5D%5B12%5D%5Btag_id%5D=183&product%5BtempTags%5D%5B12%5D%5Bname%5D=%E5%A4%A7%E9%98%AA&product%5BtempTags%5D%5B12%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B12%5D%5Bselected%5D=0&&product%5BtempTags%5D%5B13%5D%5Btag_id%5D=276&product%5BtempTags%5D%5B13%5D%5Bname%5D=%E5%B2%97%E5%B1%B1&product%5BtempTags%5D%5B13%5D%5Bcatg_id%5D=28&product%5BtempTags%5D%5B13%5D%5Bselected%5D=0&&&&&&&&&&&",
+            "params": [
+              {
+                "name": "product%5Bid%5D",
+                "value": "1431"
+              },
+              {
+                "name": "product%5Bsp_id%5D",
+                "value": "4310"
+              },
+              {
+                "name": "product%5Bstatus%5D",
+                "value": "1"
+              },
+              {
+                "name": "product%5Bmode%5D",
+                "value": "1"
+              },
+              {
+                "name": "product%5Bno%5D",
+                "value": "160718F96F"
+              },
+              {
+                "name": "product%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5Bpri_catg_id%5D",
+                "value": "5"
+              },
+              {
+                "name": "product%5Bprice_tpl%5D%5B0%5D",
+                "value": "%E6%88%90%E4%BA%BA"
+              },
+              {
+                "name": "product%5Bprice_tpl%5D%5B1%5D",
+                "value": "%E5%84%BF%E7%AB%A5"
+              },
+              {
+                "name": "product%5Bprice_tpl%5D%5B2%5D",
+                "value": "%E5%B9%BC%E5%84%BF"
+              },
+              {
+                "name": "product%5Btitle%5D",
+                "value": "%E9%A6%96%E5%B0%94%E6%B5%8E%E5%B7%9E7%E6%97%A5%E6%B8%B8"
+              },
+              {
+                "name": "product%5Bindexpic%5D",
+                "value": "%2FPublic%2Fuploadfile%2Ffile%2F2016-07-18%2F578c7c5d703c1.jpg"
+              },
+              {
+                "name": "product%5Bduration%5D",
+                "value": "7"
+              },
+              {
+                "name": "product%5Bsrp%5D",
+                "value": "0"
+              },
+              {
+                "name": "product%5Bplace_depart%5D",
+                "value": "%E6%88%90%E9%83%BD"
+              },
+              {
+                "name": "product%5Bplace_gather%5D",
+                "value": "%E5%8F%8C%E6%B5%81%E6%9C%BA%E5%9C%BA"
+              },
+              {
+                "name": "product%5Bsold%5D",
+                "value": "0"
+              },
+              {
+                "name": "product%5Bhits%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5Baddtime%5D",
+                "value": "2016-07-18%2014%3A44%3A13"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5Brow_version%5D",
+                "value": "20"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5Blasttime%5D",
+                "value": "0"
+              },
+              {
+                "name": "product%5Bgathertimes%5D",
+                "value": "0"
+              },
+              {
+                "name": "product%5Bmanaged_by%5D",
+                "value": "4021"
+              },
+              {
+                "name": "product%5Bcreate_by%5D",
+                "value": "4021"
+              },
+              {
+                "name": "product%5Bdeadline%5D",
+                "value": "7"
+              },
+              {
+                "name": "product%5Bupdate_time%5D",
+                "value": "2016-12-12%2016%3A42%3A51"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B0%5D%5Btag_id%5D",
+                "value": "182"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B0%5D%5Bname%5D",
+                "value": "%E4%B8%9C%E4%BA%AC"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B0%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B0%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B1%5D%5Btag_id%5D",
+                "value": "194"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B1%5D%5Bname%5D",
+                "value": "%E4%BB%81%E5%B7%9D"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B1%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B1%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B2%5D%5Btag_id%5D",
+                "value": "193"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B2%5D%5Bname%5D",
+                "value": "%E6%B1%9F%E5%8E%9F%E9%81%93"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B2%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B2%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B3%5D%5Btag_id%5D",
+                "value": "192"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B3%5D%5Bname%5D",
+                "value": "%E6%B5%8E%E5%B7%9E%E5%B2%9B"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B3%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B3%5D%5Bselected%5D",
+                "value": "1"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B4%5D%5Btag_id%5D",
+                "value": "191"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B4%5D%5Bname%5D",
+                "value": "%E9%A6%96%E5%B0%94"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B4%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B4%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B5%5D%5Btag_id%5D",
+                "value": "190"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B5%5D%5Bname%5D",
+                "value": "%E7%A5%9E%E6%88%B7"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B5%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B5%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B6%5D%5Btag_id%5D",
+                "value": "189"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B6%5D%5Bname%5D",
+                "value": "%E9%95%BF%E5%B4%8E"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B6%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B6%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B7%5D%5Btag_id%5D",
+                "value": "188"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B7%5D%5Bname%5D",
+                "value": "%E7%86%8A%E6%9C%AC"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B7%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B7%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B8%5D%5Btag_id%5D",
+                "value": "187"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B8%5D%5Bname%5D",
+                "value": "%E7%A6%8F%E5%86%88"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B8%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B8%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B9%5D%5Btag_id%5D",
+                "value": "186"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B9%5D%5Bname%5D",
+                "value": "%E5%86%B2%E7%BB%B3"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B9%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B9%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B10%5D%5Btag_id%5D",
+                "value": "185"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B10%5D%5Bname%5D",
+                "value": "%E5%8C%97%E6%B5%B7%E9%81%93"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B10%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B10%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B11%5D%5Btag_id%5D",
+                "value": "184"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B11%5D%5Bname%5D",
+                "value": "%E4%BA%AC%E9%83%BD"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B11%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B11%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B12%5D%5Btag_id%5D",
+                "value": "183"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B12%5D%5Bname%5D",
+                "value": "%E5%A4%A7%E9%98%AA"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B12%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B12%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "product%5BtempTags%5D%5B13%5D%5Btag_id%5D",
+                "value": "276"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B13%5D%5Bname%5D",
+                "value": "%E5%B2%97%E5%B1%B1"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B13%5D%5Bcatg_id%5D",
+                "value": "28"
+              },
+              {
+                "name": "product%5BtempTags%5D%5B13%5D%5Bselected%5D",
+                "value": "0"
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              },
+              {
+                "name": "",
+                "value": ""
+              }
+            ]
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "name": "Date",
+              "value": "Thu, 15 Dec 2016 06:56:23 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache/2.4.17 (Unix) OpenSSL/1.0.1q PHP/5.6.15 mod_perl/2.0.8-dev Perl/v5.16.3"
+            },
+            {
+              "name": "X-Powered-By",
+              "value": "PHP/5.6.15"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "name": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "100"
+            },
+            {
+              "name": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 100,
+            "mimeType": "application/json",
+            "compression": 0
+          },
+          "redirectURL": "",
+          "headersSize": 431,
+          "bodySize": 100,
+          "_transferSize": 531
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 2.666,
+          "dns": 0.20999999999999996,
+          "connect": 43.392,
+          "send": 0.27899999999999636,
+          "wait": 113.399,
+          "receive": 1.1840003714859506,
+          "ssl": -1
+        },
+        "serverIPAddress": "112.74.95.104",
+        "connection": "19757"
+      },
+      {
+        "startedDateTime": "2016-12-15T06:56:23.548Z",
+        "time": 129.2149997316301,
+        "request": {
+          "method": "GET",
+          "url": "http://gys.lyq517.com/product/api_detail?id=1431",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "PHPSESSID=0ekkoihu1k73n6budtf46gob24"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch"
+            },
+            {
+              "name": "Host",
+              "value": "gys.lyq517.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "zh-CN,zh;q=0.8,en;q=0.6,en-US;q=0.4"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "name": "Referer",
+              "value": "http://gys.lyq517.com/Product/edit/id/1431.html"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "id",
+              "value": "1431"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "PHPSESSID",
+              "value": "0ekkoihu1k73n6budtf46gob24",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 499,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "name": "Date",
+              "value": "Thu, 15 Dec 2016 06:56:23 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache/2.4.17 (Unix) OpenSSL/1.0.1q PHP/5.6.15 mod_perl/2.0.8-dev Perl/v5.16.3"
+            },
+            {
+              "name": "X-Powered-By",
+              "value": "PHP/5.6.15"
+            },
+            {
+              "name": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "name": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=99"
+            },
+            {
+              "name": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 26218,
+            "mimeType": "application/json",
+            "compression": -13
+          },
+          "redirectURL": "",
+          "headersSize": 437,
+          "bodySize": 26231,
+          "_transferSize": 26668
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 8.022,
+          "dns": -1,
+          "connect": -1,
+          "send": 0.8309999999999995,
+          "wait": 76.141,
+          "receive": 44.22099973163009,
+          "ssl": -1
+        },
+        "serverIPAddress": "112.74.95.104",
+        "connection": "19757"
+      },
+      {
+        "startedDateTime": "2016-12-15T06:56:26.037Z",
+        "time": 65.87600009515882,
+        "request": {
+          "method": "GET",
+          "url": "http://gys.lyq517.com/Public/Common/controls/ckeditor/skins/moono/icons.png",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Referer",
+              "value": "http://gys.lyq517.com/Public/Common/controls/ckeditor/skins/moono/editor.css?t=FACH"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Sun, 11 Dec 2016 05:50:26 GMT"
+            },
+            {
+              "name": "Last-Modified",
+              "value": "Wed, 18 May 2016 00:57:49 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache/2.4.17 (Unix) OpenSSL/1.0.1q PHP/5.6.15 mod_perl/2.0.8-dev Perl/v5.16.3"
+            },
+            {
+              "name": "Accept-Ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "ETag",
+              "value": "\"509a-5331358b1dd40\""
+            },
+            {
+              "name": "Content-Length",
+              "value": "20634"
+            },
+            {
+              "name": "Content-Type",
+              "value": "image/png"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 20634,
+            "mimeType": "image/png"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": 0,
+          "_transferSize": 0
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 2.432,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 27.763,
+          "receive": 35.681000095158815,
+          "ssl": -1
+        },
+        "serverIPAddress": "112.74.95.104"
+      },
+      {
+        "startedDateTime": "2016-12-15T06:56:26.431Z",
+        "time": 5.022000055760145,
+        "request": {
+          "method": "GET",
+          "url": "http://gys.lyq517.com/Public/uploadfile/file/2016-07-18/578c7c5d703c1.jpg",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Referer",
+              "value": "http://gys.lyq517.com/Product/edit/id/1431.html"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Wed, 07 Dec 2016 08:31:39 GMT"
+            },
+            {
+              "name": "Last-Modified",
+              "value": "Mon, 18 Jul 2016 06:51:09 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache/2.4.17 (Unix) OpenSSL/1.0.1q PHP/5.6.15 mod_perl/2.0.8-dev Perl/v5.16.3"
+            },
+            {
+              "name": "Accept-Ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "ETag",
+              "value": "\"2d09e-537e364a21140\""
+            },
+            {
+              "name": "Content-Length",
+              "value": "184478"
+            },
+            {
+              "name": "Content-Type",
+              "value": "image/jpeg"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 184478,
+            "mimeType": "image/jpeg"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": 0,
+          "_transferSize": 0
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 2.45,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 0.36099999999999977,
+          "receive": 2.2110000557601452,
+          "ssl": -1
+        },
+        "serverIPAddress": "112.74.95.104"
+      },
+      {
+        "startedDateTime": "2016-12-15T06:56:26.452Z",
+        "time": 378.1179999932647,
+        "request": {
+          "method": "GET",
+          "url": "http://gys.lyq517.com/Public/uploadfile/file/2016-07-18/578c7bfc0a896.jpeg",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Referer",
+              "value": "http://gys.lyq517.com/Product/edit/id/1431.html"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Mon, 12 Dec 2016 03:56:02 GMT"
+            },
+            {
+              "name": "Last-Modified",
+              "value": "Mon, 18 Jul 2016 06:49:32 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache/2.4.17 (Unix) OpenSSL/1.0.1q PHP/5.6.15 mod_perl/2.0.8-dev Perl/v5.16.3"
+            },
+            {
+              "name": "Accept-Ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "ETag",
+              "value": "\"1b06b-537e35ed9f700\""
+            },
+            {
+              "name": "Content-Length",
+              "value": "110699"
+            },
+            {
+              "name": "Content-Type",
+              "value": "image/jpeg"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 110699,
+            "mimeType": "image/jpeg"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": 0,
+          "_transferSize": 0
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 2.353,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 353.49,
+          "receive": 22.274999993264657,
+          "ssl": -1
+        },
+        "serverIPAddress": "112.74.95.104"
+      },
+      {
+        "startedDateTime": "2016-12-15T06:56:26.458Z",
+        "time": 370.1210003346205,
+        "request": {
+          "method": "GET",
+          "url": "http://gys.lyq517.com/Public/uploadfile/file/2016-07-18/578c75d0b795f.jpg",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Referer",
+              "value": "http://gys.lyq517.com/Product/edit/id/1431.html"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Mon, 12 Dec 2016 03:56:02 GMT"
+            },
+            {
+              "name": "Last-Modified",
+              "value": "Mon, 18 Jul 2016 06:23:12 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache/2.4.17 (Unix) OpenSSL/1.0.1q PHP/5.6.15 mod_perl/2.0.8-dev Perl/v5.16.3"
+            },
+            {
+              "name": "Accept-Ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "ETag",
+              "value": "\"241b5-537e300ad1400\""
+            },
+            {
+              "name": "Content-Length",
+              "value": "147893"
+            },
+            {
+              "name": "Content-Type",
+              "value": "image/jpeg"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 147893,
+            "mimeType": "image/jpeg"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": 0,
+          "_transferSize": 0
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 5.116,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 339.165,
+          "receive": 25.84000033462047,
+          "ssl": -1
+        },
+        "serverIPAddress": "112.74.95.104"
+      },
+      {
+        "startedDateTime": "2016-12-15T06:56:26.771Z",
+        "time": 68.23799991980195,
+        "request": {
+          "method": "GET",
+          "url": "http://gys.lyq517.com/Public/uploadfile/file/2016-07-18/578c76b34dd13.jpg",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Referer",
+              "value": "http://gys.lyq517.com/Product/edit/id/1431.html"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Mon, 12 Dec 2016 03:56:02 GMT"
+            },
+            {
+              "name": "Last-Modified",
+              "value": "Mon, 18 Jul 2016 06:26:59 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache/2.4.17 (Unix) OpenSSL/1.0.1q PHP/5.6.15 mod_perl/2.0.8-dev Perl/v5.16.3"
+            },
+            {
+              "name": "Accept-Ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "ETag",
+              "value": "\"79ebf-537e30e34d2c0\""
+            },
+            {
+              "name": "Content-Length",
+              "value": "499391"
+            },
+            {
+              "name": "Content-Type",
+              "value": "image/jpeg"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 499391,
+            "mimeType": "image/jpeg"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": 0,
+          "_transferSize": 0
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 10.165,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 6.497,
+          "receive": 51.57599991980195,
+          "ssl": -1
+        },
+        "serverIPAddress": "112.74.95.104"
+      },
+      {
+        "startedDateTime": "2016-12-15T06:56:26.773Z",
+        "time": 52.558999974280596,
+        "request": {
+          "method": "GET",
+          "url": "http://gys.lyq517.com/Public/uploadfile/file/2016-07-18/578c766025f8a.jpg",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Referer",
+              "value": "http://gys.lyq517.com/Product/edit/id/1431.html"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Mon, 12 Dec 2016 03:56:02 GMT"
+            },
+            {
+              "name": "Last-Modified",
+              "value": "Mon, 18 Jul 2016 06:25:36 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache/2.4.17 (Unix) OpenSSL/1.0.1q PHP/5.6.15 mod_perl/2.0.8-dev Perl/v5.16.3"
+            },
+            {
+              "name": "Accept-Ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "ETag",
+              "value": "\"10d26-537e309425800\""
+            },
+            {
+              "name": "Content-Length",
+              "value": "68902"
+            },
+            {
+              "name": "Content-Type",
+              "value": "image/jpeg"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 68902,
+            "mimeType": "image/jpeg"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": 0,
+          "_transferSize": 0
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 14.022,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 20.93,
+          "receive": 17.606999974280598,
+          "ssl": -1
+        },
+        "serverIPAddress": "112.74.95.104"
+      }
+    ]
+  }
+}

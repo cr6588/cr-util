@@ -1,105 +1,115 @@
 package com.cdzy.cr.proxy;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.cdzy.cr.util.HttpUtil;
-import com.cdzy.cr.util.SyncSession;
+import com.cdzy.cr.util.FileUtil;
 
-public class MapperProxy implements InvocationHandler {
-    private Document document;
-    MapperProxy (Document document) {
-        this.document = document;
+public class MapperProxy {
+    private static Logger logger = LoggerFactory.getLogger(MapperProxy.class);
+
+    /**
+     * 生成http接口与xml对应的实例
+     * @param mapperInterface
+     * @param document
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T newMapperProxy(Class<T> mapperInterface, Document document) {
+        ClassLoader classLoader = mapperInterface.getClassLoader();
+        Class<?>[] interfaces = new Class[] { mapperInterface };
+        MapperClient proxy = new MapperClient(document);
+        return (T) Proxy.newProxyInstance(classLoader, interfaces, proxy);
     }
-    MapperProxy () {
-    }
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        Element rootElement = document.getRootElement();
-        SyncSession session = null;
-        if(args != null) {
-            for (Object arg : args) {
-                if(arg instanceof SyncSession) {
-                    session = (SyncSession) arg;
+
+    /**
+     * 获取http接口实例
+     * @param clazz http接口所在类
+     * @param o
+     * @return
+     */
+    @SuppressWarnings("resource")
+    public static <T> T getHttpInstance(Class<T> clazz, Object o) {
+        if (o == null) {
+            String jarPath = FileUtil.getRootPath(clazz);
+            //测试时xml文件在target-class的http接口所在目录中，但实际运行时是在jar包中所以了获取xml文件分成2种方式
+            if(new File(jarPath).isFile()) { //如果是在jar包中
+                List<JarEntry> jarEnties = null;
+                // 获取class所在包下的xml文件
+                jarEnties = FileUtil.getJarEntiesBySuffix(jarPath, "xml");
+                if (jarEnties == null || jarEnties.size() == 0) {
+                    logger.error(jarPath + "路径下没有xml文件");
+                    return null;
                 }
-            }
-            Map<String, Object> httpArg = (HashMap<String, Object>)args[0];
-            if(rootElement.elements("http") != null) {
-                List<Element> https = rootElement.elements("http");
-                for (Element http : https) {
-                    if(method.getName().equals(http.attribute("id").getText())) {
-                        String resultType = http.attribute("resultType").getText();
-//                        if(httpArg.get("url") == null) {
-//                            //
-//                            return null;
-//                        }
-//                        checkArg();
-                        String url = http.element("url").getText();
-                        if(httpArg.get("urlformat") != null) {
-                            url = String.format(url, httpArg.get("urlformat"));
+                JarFile jarFile = null;
+                try {
+                    jarFile = new JarFile(jarPath);
+                } catch (IOException e) {
+                    return null;
+                }
+                for (JarEntry jarEntry : jarEnties) {
+                    try {
+                        T t = getInstanceByInputStream(clazz, jarFile.getInputStream(jarEntry));
+                        if(t != null) {
+                            return t;
                         }
-                        String methodHttp = http.element("method").getText();
-                        List<Element> headers = http.element("headers").elements("header");
-                        if(headers != null) {
-                            //set header
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                String packagePath = clazz.getResource("").getPath();
+                List<File> files = FileUtil.getFilesBySuffix(packagePath, "xml");
+                if (files == null || files.size() == 0) {
+                    logger.error(packagePath + "路径下没有xml文件");
+                    return null;
+                }
+                for (File file : files) {
+                    try {
+                        T t = getInstanceByInputStream(clazz, new FileInputStream(file));
+                        if(t != null) {
+                            return t;
                         }
-                        List<BasicNameValuePair> paramsBasicNameValuePairs = null;
-                        if(http.element("params") != null) {
-                            List<Element> paramsHttp = http.element("params").elements("param");
-                            if(paramsHttp != null) {
-                                paramsBasicNameValuePairs = new ArrayList<BasicNameValuePair>();
-                                for (Element paramHttp : paramsHttp) {
-                                    String paramValue = paramHttp.attributeValue("value");
-                                    if(paramValue.trim().startsWith("#{") && paramValue.trim().endsWith("}")) {
-                                        String httpArgKey = paramValue.trim().substring(paramValue.trim().indexOf("#{") + 2, paramValue.trim().lastIndexOf("}"));
-                                        String httpArgValue = httpArg.get(httpArgKey).toString();
-                                        paramsBasicNameValuePairs.add(new BasicNameValuePair(paramHttp.attributeValue("key"), httpArgValue));
-                                    } else {
-                                        paramsBasicNameValuePairs.add(new BasicNameValuePair(paramHttp.attributeValue("key"), paramValue));
-                                    }
-                                }
-                            }
-                        }
-                        boolean isAjax = false;
-                        if(http.element("ajax") != null) {
-                            isAjax = Boolean.parseBoolean(http.element("ajax").getText());
-                        }
-                        if(methodHttp.equalsIgnoreCase("get")) {
-                            if (resultType.equalsIgnoreCase("String")) {
-                                return HttpUtil.getGetHttpResStr(session, url, isAjax);
-                            }
-                        } else if (methodHttp.equalsIgnoreCase("post")) {
-                            
-                        } else {
-                            //method 非法
-                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
             }
         }
+        logger.error(clazz.getName() + "的实例生成失败，请检查是否有与其对应的xml文件");
         return null;
     }
-    
-    public static <T> T newMapperProxy(Class<T> mapperInterface) {  
-        ClassLoader classLoader = mapperInterface.getClassLoader();  
-        Class<?>[] interfaces = new Class[]{mapperInterface};  
-        MapperProxy proxy = new MapperProxy();  
-        return (T) Proxy.newProxyInstance(classLoader, interfaces, proxy);  
-      }
 
-    public static <T> T newMapperProxy(Class<T> mapperInterface ,Document document) {  
-        ClassLoader classLoader = mapperInterface.getClassLoader();  
-        Class<?>[] interfaces = new Class[]{mapperInterface};  
-        MapperProxy proxy = new MapperProxy(document);  
-        return (T) Proxy.newProxyInstance(classLoader, interfaces, proxy);  
-      }
+    public static <T> T getInstanceByInputStream(Class<T> clazz, InputStream inputStream) {
+        try {
+            SAXReader saxReader = new SAXReader();
+            Document document = saxReader.read(inputStream);
+            Element rootElement = document.getRootElement();
+            if (clazz.getName().equals(rootElement.attributeValue("namespace"))) {
+                return MapperProxy.newMapperProxy(clazz, document);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 }
