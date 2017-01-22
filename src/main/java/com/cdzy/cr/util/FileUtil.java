@@ -3,7 +3,13 @@ package com.cdzy.cr.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class FileUtil {
     /**
@@ -64,7 +70,7 @@ public class FileUtil {
             char[] chars = new char[1];
             int len;
             while ((len = fis.read(chars)) != -1) {
-                String temp = new String(chars, 0, len);
+                str += new String(chars, 0, len);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -150,5 +156,73 @@ public class FileUtil {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * 文件后缀过滤
+     *
+     */
+    static class FileSuffixFilter implements FilenameFilter {
+        private String suffix;
+        FileSuffixFilter(String suffix) {
+            this.suffix = suffix;
+        }
+        @Override
+        public boolean accept(File dir, String name) {
+            return name.endsWith(suffix);
+        }
+    }
+
+    /**
+     * 获取指定路径下的指定后缀的文件
+     * @param path
+     * @param suffix
+     * @return
+     */
+    public static List<File> getFilesBySuffix(String path, String suffix) {
+        File[] files = new File(path).listFiles(new FileSuffixFilter(suffix));
+        List<File> listFile = new ArrayList<File>();
+        for (File file : files) {
+            if(file.isFile()) {
+                listFile.add(file);
+            } else if (file.isDirectory()) {
+                listFile.addAll(getFilesBySuffix(file.getPath(), suffix));
+            }
+        }
+        return listFile;
+    }
+
+    /**
+     * 获取jar包中指定后缀的文件
+     * @param jarPath
+     * @param suffix
+     * @return
+     */
+    @SuppressWarnings("resource")
+    public static List<JarEntry> getJarEntiesBySuffix(String jarPath, String suffix) {
+        JarFile xmlFile = null;
+        try {
+            xmlFile = new JarFile(jarPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Enumeration<JarEntry> Enumeration = xmlFile.entries();
+        List<JarEntry> jarEntries = new ArrayList<JarEntry>();
+        for (;Enumeration.hasMoreElements();) {
+            JarEntry entry = Enumeration.nextElement();
+            if(entry.getName().endsWith(suffix)) {
+                jarEntries.add(entry);
+            }
+        }
+        return jarEntries.size() == 0 ? null : jarEntries;
+    }
+
+    /**
+     * 获取指定类的根路径，jar包中返回的jar包文件所在路径
+     * @param clazz
+     * @return
+     */
+    public static <T> String getRootPath(Class<T> clazz) {
+        return clazz.getProtectionDomain().getCodeSource().getLocation().getPath();
     }
 }

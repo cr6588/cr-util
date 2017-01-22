@@ -2,6 +2,8 @@ package com.cdzy.cr.util;
 
 import java.util.Date;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Test;
 
 public class DateUtilTest {
@@ -22,6 +24,8 @@ public class DateUtilTest {
             date = DateUtil.addDay(date, 1);
             
         }
+        Document document = Jsoup.parse("s");
+        document.select("img").parents().get(0).nextElementSibling().select("a").text();
     }
     
     @Test
