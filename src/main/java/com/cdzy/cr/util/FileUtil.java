@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -224,5 +226,31 @@ public class FileUtil {
      */
     public static <T> String getRootPath(Class<T> clazz) {
         return clazz.getProtectionDomain().getCodeSource().getLocation().getPath();
+    }
+
+    public static boolean deleteFileDir(String path) throws Exception {
+        File file = new File(path);
+        return deleteFileDir(file);
+    }
+
+    public static boolean deleteFileDir(File file) throws Exception {
+        if(!file.exists()) {
+            throw new Exception( file.getName() + " not found!");
+        }
+        
+        //Deletes the file or directory denoted by this abstract pathname.
+        //If this pathname denotes a directory, then the directory must be empty in order to be deleted.
+        File[] files = file.listFiles();
+        //Arrays.asList()返回的是Arrays中的内部类ArrayList，ArrayList继承AbstractList,AbstractList中的add方法会直接抛出异常
+        for (File f : files) {
+            if(f.isDirectory()) {
+                deleteFileDir(f);
+            } else {
+                if(!f.delete()) {
+                    return false; //有一个文件没有删除成功就返回
+                }
+            }
+        }
+        return file.delete();
     }
 }

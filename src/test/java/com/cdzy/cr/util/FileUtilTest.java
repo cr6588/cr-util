@@ -105,4 +105,15 @@ public class FileUtilTest {
             }
         }
     }
+
+    @Test
+    public void deleteFileDirTest() {
+        try {
+            System.out.println(FileUtil.deleteFileDir("D:\\mysql-5.6.35-winx64"));
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
 }
