@@ -10,11 +10,11 @@ import org.dom4j.io.SAXReader;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
-import com.cdzy.cr.proxy.DownloadOtherHttp;
-import com.cdzy.cr.proxy.FacadeProxy;
-import com.cdzy.cr.proxy.IHello;
-import com.cdzy.cr.proxy.MapperClient;
-import com.cdzy.cr.util.SyncSession;
+import com.cr.http.DownloadOtherHttp;
+import com.cr.http.IHello;
+import com.cr.http.proxy.FacadeProxy;
+import com.cr.http.proxy.MapperClient;
+import com.cr.util.SyncSession;
 
 public class ProxyTest {
 

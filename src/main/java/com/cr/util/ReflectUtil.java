@@ -1,4 +1,4 @@
-package com.cdzy.cr.util;
+package com.cr.util;
 
 import java.lang.reflect.Field;
 

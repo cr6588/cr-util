@@ -1,4 +1,4 @@
-package com.cdzy.cr.util;
+package com.cr.util;
 
 import java.io.File;
 import java.io.FileInputStream;

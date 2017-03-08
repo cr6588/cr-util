@@ -3,6 +3,8 @@ package com.cdzy.cr.util;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.cr.util.StringUtil;
+
 public class StringUtilTest {
 
     @Test

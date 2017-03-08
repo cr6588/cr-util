@@ -1,4 +1,4 @@
-package com.cdzy.cr.proxy;
+package com.cr.http;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,8 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.cdzy.cr.util.SyncSession;
+import com.cr.http.proxy.MapperProxy;
+import com.cr.util.SyncSession;
 
 /**
  * 下载其它相关的类

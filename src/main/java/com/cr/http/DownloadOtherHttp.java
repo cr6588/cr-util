@@ -1,8 +1,8 @@
-package com.cdzy.cr.proxy;
+package com.cr.http;
 
 import java.util.Map;
 
-import com.cdzy.cr.util.SyncSession;
+import com.cr.util.SyncSession;
 
 public interface DownloadOtherHttp {
     /**

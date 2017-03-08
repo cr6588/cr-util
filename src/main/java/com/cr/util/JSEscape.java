@@ -1,4 +1,4 @@
-package com.cdzy.cr.util;
+package com.cr.util;
 
 /** 
  * java模拟js的escape和unescape函数. 

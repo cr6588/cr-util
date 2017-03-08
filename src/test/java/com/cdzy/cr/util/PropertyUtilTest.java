@@ -2,6 +2,8 @@ package com.cdzy.cr.util;
 
 import org.junit.Test;
 
+import com.cr.util.PropertyUtil;
+
 public class PropertyUtilTest {
 
     @Test

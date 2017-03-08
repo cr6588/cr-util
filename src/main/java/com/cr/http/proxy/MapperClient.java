@@ -1,4 +1,4 @@
-package com.cdzy.cr.proxy;
+package com.cr.http.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -24,7 +24,7 @@ import org.jsoup.helper.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cdzy.cr.util.SyncSession;
+import com.cr.util.SyncSession;
 
 public class MapperClient implements InvocationHandler {
     private static Logger logger = LoggerFactory.getLogger(MapperClient.class);

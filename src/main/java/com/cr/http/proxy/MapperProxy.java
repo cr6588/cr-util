@@ -1,4 +1,4 @@
-package com.cdzy.cr.proxy;
+package com.cr.http.proxy;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,7 +15,7 @@ import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cdzy.cr.util.FileUtil;
+import com.cr.util.FileUtil;
 
 public class MapperProxy {
     private static Logger logger = LoggerFactory.getLogger(MapperProxy.class);

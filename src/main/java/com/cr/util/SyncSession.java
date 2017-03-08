@@ -1,4 +1,4 @@
-package com.cdzy.cr.util;
+package com.cr.util;
 
 import java.util.HashMap;
 import java.util.List;
