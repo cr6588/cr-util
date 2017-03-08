@@ -10,6 +10,9 @@ import java.sql.Statement;
 
 import org.apache.log4j.net.SMTPAppender;
 
+import com.cr.util.FileUtil;
+import com.cr.util.StringUtil;
+
 public class JDBC {
 
     private static final String MYSQL_JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -63,7 +66,7 @@ public class JDBC {
     }
 
     public Connection getCon() throws Exception {
-        if (con == null) {
+        if (con == null || con.isClosed()) {
             this.loadDriver();
             if( password == null ){
                 con = DriverManager.getConnection(url);
@@ -84,7 +87,7 @@ public class JDBC {
     }
 
     public Statement getStmt() throws Exception {
-        if (stmt == null) {
+        if (stmt == null || stmt.isClosed()) {
             stmt = this.getCon().createStatement();
         }
         return stmt;
@@ -95,7 +98,7 @@ public class JDBC {
     }
 
     public PreparedStatement getPstmt() throws Exception {
-        if (pstmt == null) {
+        if (pstmt == null || pstmt.isClosed()) {
             pstmt = this.getCon().prepareStatement(sql);
         }
         return pstmt;
@@ -106,7 +109,7 @@ public class JDBC {
     }
 
     public CallableStatement getCstmt() throws Exception {
-        if (cstmt == null) {
+        if (cstmt == null || cstmt.isClosed()) {
             cstmt = this.getCon().prepareCall(sql);
         }
         return cstmt;
@@ -193,25 +196,41 @@ public class JDBC {
         return sb.toString();
     }
 
-    public static void conUnknownDb() {
-        JDBC jdbc = new JDBC("jdbc:mysql://localhost:3306?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "dev", "dev");
-        String sql = "show databases";
-        jdbc.setSql(sql);
+    public boolean createDb(String dbName, String sqlPath) {
+        String sql = "CREATE DATABASE `" + dbName + "` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+        sql += "use " + dbName + ";";
+        sql += FileUtil.readTxtFile2StrByStringBuilder(sqlPath);
         try {
-            ResultSet rs = jdbc.getStmt().executeQuery(sql);
-            jdbc.setRs(rs);
+            getStmt().execute(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return existDb(dbName);
+    }
+
+    public boolean existDb(String userDbName) {
+        // JDBC jdbc = new
+        // JDBC("jdbc:mysql://118.123.8.140:3306?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8",
+        // "root", "363505e8956fad91");
+        String sql = "show databases";
+        try {
+            ResultSet rs = getStmt().executeQuery(sql);
+            setRs(rs);
             while (rs.next()) {
-                String str = rs.getString(1);
-                System.out.println(str);
+                String existDbName = rs.getString(1);
+                if (existDbName.equals(userDbName)) {
+                    return true;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            jdbc.close();
+            close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public static void main(String[] args) throws Exception {
