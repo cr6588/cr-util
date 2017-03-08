@@ -1,4 +1,4 @@
-package com.cdzy.cr.util.proxy;
+package com.cr.util.proxy;
 
 import java.io.File;
 import java.io.FileInputStream;
