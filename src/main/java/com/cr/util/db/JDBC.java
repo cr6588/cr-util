@@ -5,19 +5,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.apache.log4j.net.SMTPAppender;
-
 import com.cr.util.FileUtil;
-import com.cr.util.StringUtil;
 
 public class JDBC {
 
     private static final String MYSQL_JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private String driverName = MYSQL_JDBC_DRIVER;
     private String url;
+    private String port;
     private String username;
     private String password;
     private Connection con = null;
@@ -61,6 +58,13 @@ public class JDBC {
 
     public JDBC(String url, String username, String password) {
         this.url = url;
+        this.username = username;
+        this.password = password;
+    }
+
+    public JDBC(String url, String port, String username, String password) {
+        this.url = url;
+        this.port = port;
         this.username = username;
         this.password = password;
     }
@@ -162,27 +166,29 @@ public class JDBC {
      * @param newPassword 新密码
      * @throws Exception 
      */
-    public static void initUser(String url, String port , String oldPassword, String newPassword) throws Exception {
+    public void initUser(String newPassword) throws Exception {
         if(url == null || url.equals("")) {
             url = "localhost";
         }
-        url = "jdbc:mysql://" + url + ":" + (port == null || port.equals("") ? "3306" : port) + "/mysql?user=root&password=&allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8";
-        JDBC jdbc = new JDBC(url, "root", oldPassword);
+        if(password == null || password.equals("")) {
+            url = url = "jdbc:mysql://" + url + ":" + (port == null || port.equals("") ? "3306" : port) + "/mysql?user=root&password=&allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8";
+        } else {
+            url = "jdbc:mysql://" + url + ":" + (port == null || port.equals("") ? "3306" : port) + "/mysql?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8";
+        }
         StringBuilder sql = new StringBuilder("UPDATE user SET password=PASSWORD('" + newPassword + "') WHERE user='root';");
         try {
             sql.append("DELETE FROM user Where User='' and Host='localhost';"); //删除 @localhost用户
             sql.append(getAddDevUserSql());
             sql.append("FLUSH PRIVILEGES");
-            jdbc.setSql(sql.toString());
-            jdbc.getPstmt().execute(jdbc.getSql());
+            setSql(sql.toString());
+            getPstmt().execute(getSql());
         } catch (Exception e) {
         	e.printStackTrace();
-            throw new Exception("初始化用户出错");
+            throw new Exception("init user error！");
         } finally {
             try {
-                jdbc.close();
+                close();
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

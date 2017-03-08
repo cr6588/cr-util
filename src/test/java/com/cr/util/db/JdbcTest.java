@@ -75,7 +75,8 @@ public class JdbcTest {
     @Test
     public void initUserTest() {
         try {
-            JDBC.initUser(null, "3306",  null,  "654321");
+            JDBC jdbc = new JDBC(null, "3308" , "root", "123456");
+            jdbc.initUser("654321");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
