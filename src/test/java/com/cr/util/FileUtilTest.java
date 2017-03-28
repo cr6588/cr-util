@@ -1,18 +1,18 @@
 package com.cr.util;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.Iterator;
 
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.protocol.HttpCoreContext;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.cr.util.FileUtil;
 
 public class FileUtilTest {
 
@@ -116,5 +116,10 @@ public class FileUtilTest {
             e.printStackTrace();
         }
     }
-    
+
+    @Test
+    public void loadJarTest() {
+        HttpCoreContext b = new HttpCoreContext();
+        System.out.println(b.getClass().getResource("").getPath());
+    }
 }

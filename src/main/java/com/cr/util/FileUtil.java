@@ -1,14 +1,15 @@
 package com.cr.util;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -120,6 +121,26 @@ public class FileUtil {
                     e.printStackTrace();
                 }
             }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 读取clazz所在jar包文件path路径的文件
+     * @param clazz
+     * @param path
+     * @return
+     */
+    public static String readTxtFile2StrByStringBuilder(Class<?> clazz, String path) {
+        StringBuilder sb = new StringBuilder();
+        try (InputStream is = clazz.getResourceAsStream(path); BufferedReader br = new BufferedReader(new InputStreamReader(is));) {
+            char[] chars = new char[1];
+            int len;
+            while ((len = br.read(chars)) != -1) {
+                sb.append(chars, 0, len);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return sb.toString();
     }

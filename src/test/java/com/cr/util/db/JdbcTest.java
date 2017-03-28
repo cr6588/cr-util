@@ -1,7 +1,7 @@
 package com.cr.util.db;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Date;
 import java.util.Random;
 
@@ -95,4 +95,18 @@ public class JdbcTest {
         }
     }
 
+    @Test
+    public void excuteTest() {
+        JDBC jdbc = new JDBC("jdbc:mysql://localhost:3306/jty_basic?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "dev", "dev");
+        String sql ="{call jty_basic.create_order_table (?, ?)}"; //存储过程调用，模块库所在的mysql必须含有存储过程
+        try {
+            CallableStatement callableStatement = jdbc.getCstmt(sql);
+            callableStatement.setString(1, "jty_order_x");
+            callableStatement.setString(2, "1");  
+            callableStatement.execute();  
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }
