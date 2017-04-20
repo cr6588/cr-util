@@ -1,0 +1,47 @@
+
+    /**
+     * 查询物流公司列表
+     * @param param 查询条件
+     * @param pager 分页条件，无需分页null
+     * @return
+     * @throws LogisticsException
+     */
+    List<PubLogisticsCompany> getPubLogisticsCompanyList(Map<String, Object> param, PagerInfo pager) throws LogisticsException;
+
+    /**
+     * 查询物流公司
+     * @param param 查询条件
+     * @return
+     * @throws LogisticsException
+     */
+    PubLogisticsCompany getPubLogisticsCompany(Map<String, Object> param) throws LogisticsException;
+
+    /**
+     * 增加物流公司
+     * @param pubLogisticsCompany 物流公司
+     * @return
+     * @throws LogisticsException
+     */
+    void addPubLogisticsCompany(PubLogisticsCompany pubLogisticsCompany) throws LogisticsException;
+
+    /**
+     * 修改物流公司
+     * @param pubLogisticsCompany 物流公司
+     * @throws LogisticsException
+     */
+    void updatePubLogisticsCompany(PubLogisticsCompany pubLogisticsCompany) throws LogisticsException;
+
+    /**
+     * 删除物流公司
+     * @param id    
+     * @throws LogisticsException
+     */
+    void deletePubLogisticsCompany(long id) throws LogisticsException;
+
+    /**
+     * 查询物流公司数量
+     * @param param 查询条件
+     * @return
+     * @throws LogisticsException
+     */
+    long getPubLogisticsCompanyListCnt(Map<String, Object> param) throws LogisticsException;

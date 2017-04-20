@@ -58,4 +58,25 @@ public class PropertyUtil {
         }
         return null;
     }
+
+    public static Properties getProperties(String filePathName) {
+        Properties properties = new Properties();
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(filePathName);
+            properties.load(fis);
+            return properties;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
 }

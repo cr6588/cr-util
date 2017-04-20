@@ -77,7 +77,7 @@ public class JDBC {
             } else {
                 con = DriverManager.getConnection(url, username, password);
             }
-            con.setAutoCommit(false);
+//            con.setAutoCommit(false);
         }
         return con;
     }
