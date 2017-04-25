@@ -12,9 +12,9 @@ import org.junit.Test;
 
 public class FileCopyTest {
 
-//    @Test
+    @Test
     public void fileCopyTest() {
-        String path = "D:\\workspace\\alatin-sync-jinxiongmao\\src\\test\\java\\test";
+        String path = "D:\\git\\erp\\erp-logistics\\src\\main\\java\\fpx\\api";
         fileGbkToUtf8(path);
     }
 
@@ -34,9 +34,9 @@ public class FileCopyTest {
                 OutputStreamWriter osw = null;
                 try {
                     fis = new FileInputStream(files[i]);
-                    isr = new InputStreamReader(fis, "utf8");
+                    isr = new InputStreamReader(fis, "gbk");
                     fos = new FileOutputStream(fileCopy);
-                    osw = new OutputStreamWriter(fos, "gbk");
+                    osw = new OutputStreamWriter(fos, "utf8");
 //                    byte[] bytes = new byte[1024 * 4];
                     char[] c = new char[1024];//缓冲
                     int len = 0;

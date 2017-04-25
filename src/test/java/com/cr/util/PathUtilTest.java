@@ -1,10 +1,6 @@
 package com.cr.util;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
-
-import com.cr.util.ReflectUtil;
 
 public class PathUtilTest {
 

@@ -1,6 +1,8 @@
 package com.cr.util;
 
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +20,7 @@ import org.junit.Test;
  * @category 根据excel内容生成sql语句
  * @auther chenyi
  */
-public class PoiTest {
+public class ExcelUtilTest {
 
     public boolean exist(String str, String[] array) {
         for (int i = 0; i < array.length; i++) {
@@ -29,15 +31,20 @@ public class PoiTest {
         return false;
     }
 
+    /**
+     * 从excel文件生成sql，目前只支持xls文件即excel97-2003
+     */
     @Test
-    public void test() {
+    public void createSQLByExcel() {
+        InputStream is = null;
         try {
-            POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream("C:/Users/cr/Desktop/表设计.xls"));
-            // 得到Excel工作簿对象
+            boolean isPrintZhClassName = true;  //是否打印中文表名，类名
+            String excelPath = this.getClass().getResource("").getPath() + "data/table.xls";
+            is = new FileInputStream(excelPath);
+            POIFSFileSystem fs = new POIFSFileSystem(is);
             HSSFWorkbook wb = new HSSFWorkbook(fs);
-            // 得到Excel工作表对象
             int sheetCount = wb.getNumberOfSheets();
-            String[] logName = { "物流公司", "物流渠道", "自定义运费规则", "区域运费", "运费组", "地址管理", "企业标签模板", "海外本地SKU关联", "物流匹配规则", "物流运单号" };
+            String[] logName = { "物流公司", "物流渠道" };
             List<String> existTable = new ArrayList<>();
             Map<String, String> existTableName = new HashMap<>();
             for (int i = 0; i < sheetCount; i++) {
@@ -54,8 +61,7 @@ public class PoiTest {
                     for (int j = 1; j < rowNum; j++) {
                         HSSFRow row = sheet.getRow(j);
                         if (row != null) {
-//                            int cellNum = row.getPhysicalNumberOfCells(); 
-                            for (int k = 0; k < 2 && !canStart; k++) { //k<cellNum TODO 物流渠道有问题待检查
+                            for (int k = 0; k < 2 && !canStart; k++) {
                                 HSSFCell cell = row.getCell(k);
                                 if (cell != null) {
                                     String cellValue = cell.getStringCellValue();
@@ -117,7 +123,7 @@ public class PoiTest {
                     for (int j = 0; j < tableNameArray.length; j++) {
                         className +=tableNameArray[j].substring(0, 1).toUpperCase() + tableNameArray[j].substring(1);
                     }
-                    System.out.println(sheetName + ":" + className + "\n" +sql);
+                    System.out.println((isPrintZhClassName ? sheetName + ":" + className + "\n" : "") +sql);
                 }
             }
             for(int i = 0; i < logName.length; i++) {
@@ -133,8 +139,13 @@ public class PoiTest {
                 }
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
