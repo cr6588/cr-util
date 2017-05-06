@@ -135,7 +135,9 @@ public class HttpUtil {
         request.setHeader("Cache-Control", "no-cache");
 
         if(isAjax) {
-            request.setHeader("X-Requested-With", "XMLHttpRequest"); //ajax请求头中含有
+            request.setHeader("X-Requested-With", "XMLHttpRequest");
+            request.setHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+            request.setHeader("Content-Type", "application/json");
         }
     }
 

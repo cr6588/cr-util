@@ -11,6 +11,9 @@ public class DateUtil {
     public static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+    public static String now() {
+        return dateTimeFormat.format(new Date());
+    }
     public static int getCurrentYear() {
         return Calendar.getInstance().get(Calendar.YEAR);
     }

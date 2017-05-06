@@ -30,7 +30,7 @@ public class MapperTest {
     public void test() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/logistics?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "dev", "dev");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mappertest?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "dev", "dev");
             String sql = "show tables;";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -68,12 +68,12 @@ public class MapperTest {
      */
     public Map<String, String> getTableZhCn() {
         try {
-            POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream("C:/Users/cr/Desktop/表设计.xls"));
+            POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(this.getClass().getResource("").getPath() + "data/表设计.xls"));
             // 得到Excel工作簿对象
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             // 得到Excel工作表对象
             int sheetCount = wb.getNumberOfSheets();
-            String[] logName = { "物流公司", "物流渠道", "自定义运费规则", "区域运费", "运费组", "地址管理", "企业标签模板", "海外本地SKU关联", "物流匹配规则", "物流运单号" };
+            String[] logName = { "系统物流公司", "系统物流渠道" };
             List<String> existTable = new ArrayList<>();
             Map<String, String> existTableName = new HashMap<>();
             for (int i = 0; i < sheetCount; i++) {
@@ -133,7 +133,7 @@ public class MapperTest {
             // break;
         }
         dao += "}";
-        // System.out.println(dao);
+//         System.out.println(dao);
     }
 
     public String getClassNameByTableName(String tableName) {

@@ -39,12 +39,13 @@ public class ExcelUtilTest {
         InputStream is = null;
         try {
             boolean isPrintZhClassName = true;  //是否打印中文表名，类名
-            String excelPath = this.getClass().getResource("").getPath() + "data/table.xls";
+            String excelPath = this.getClass().getResource("").getPath() + "data/表设计.xls";
             is = new FileInputStream(excelPath);
             POIFSFileSystem fs = new POIFSFileSystem(is);
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             int sheetCount = wb.getNumberOfSheets();
-            String[] logName = { "物流公司", "物流渠道" };
+            String[] logName = { "订单列表" };
+//            String[] logName = { "区域运费" };
             List<String> existTable = new ArrayList<>();
             Map<String, String> existTableName = new HashMap<>();
             for (int i = 0; i < sheetCount; i++) {
