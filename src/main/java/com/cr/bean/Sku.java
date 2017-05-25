@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Sku {
-    String Sku;// 商家SKU
+    String sku;// 商家SKU
     int quantity; // 数量
     int weight; // 单件重量(g)
     double declareValue; // 单件申报价值

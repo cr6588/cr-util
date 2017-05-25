@@ -177,7 +177,7 @@ public class MapperTest {
             mapperXML += createSelectConditionXml(classNameLowerCaseFirstWord, entry.getValue());
             mapperXML += createSelectXml(className, classNameLowerCaseFirstWord, tableName);
             mapperXML += createSelectListXml(className, classNameLowerCaseFirstWord, tableName);
-            mapperXML += createSelectCountXml(className, classNameLowerCaseFirstWord, tableName);
+//            mapperXML += createSelectCountXml(className, classNameLowerCaseFirstWord, tableName);
             mapperXML += "    <!--     " + className + " end -->" + enter;
             mapperXML += enter;
             // break;
@@ -248,6 +248,7 @@ public class MapperTest {
         String str = "";
         str += "    <sql id=\"" + classNameLowerCaseFirstWord + "SelectCondition\">" + enter;
         str += "        <where>" + enter;
+        str += "            `deleted` = ${@com.sjdf.erp.common.dictionary.bean.WhetherState@NO}" + enter;
         for (String column : columns) {
             str += "            <if test=\"" + column + " != null\"> and " + column + " = #{" + column + "}</if>" + enter;
         }
@@ -264,10 +265,11 @@ public class MapperTest {
      */
     private String createDelXml(String className, String tableName) {
         String str = "";
-        str += "    <delete id=\"delete" + className + "\" parameterType=\"map\">" + enter;
-        str += "        delete from `" + tableName + "`" + enter;
+        str += "    <update id=\"delete" + className + "\" parameterType=\"map\">" + enter;
+        str += "        update `" + tableName + "`" + enter;
+        str += "            set `deleted` = ${@com.sjdf.erp.common.dictionary.bean.WhetherState@YES}" + enter;
         str += "        where id = #{id} and comId = #{comId}" + enter;
-        str += "    </delete>" + enter;
+        str += "    </update>" + enter;
         return str;
     }
 
@@ -329,6 +331,7 @@ public class MapperTest {
                 str += ",";
             }
         }
+        str += ", ${@com.sjdf.erp.common.dictionary.bean.WhetherState@NO}";
         str += enter;
         str += "        )" + enter;
         str += "    </insert>" + enter;
@@ -355,6 +358,7 @@ public class MapperTest {
                 str += enter;
             }
         }
+        str += ", `deleted`";
         str += enter;
         str += "    </sql>" + enter;
         return str;

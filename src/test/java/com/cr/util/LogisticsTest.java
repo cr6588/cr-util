@@ -1,16 +1,12 @@
 package com.cr.util;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSONArray;
@@ -138,8 +134,10 @@ public class LogisticsTest {
     public String getSign(String action, String dataValue) {
         //签名串 = token + action + actionValue + app_key + app_keyValue + data + dataValue + format + formatValue + platform + platformValue + sign_method + sign_methodValue + timestamp + timestampValue + version + versionValue + token
         String str = "";
-        String token = "8078D70FBA1C72DA1F9BB4F96F0226C4";
-        str += token + "action" + action + "app_key" + "support@jtongi.cn"
+        String token = "89435277FA3BA272DE795559998E";
+//        String token = "8078D70FBA1C72DA1F9BB4F96F0226C4";
+//        str += token + "action" + action + "app_key" + "support@jtongi.cn"
+        str += token + "action" + action + "app_key" + "rebecca"
             + "data" + dataValue
             + "format" + "json" + "platform" + "SELLERERP" + "sign_method" + "md5" + "timestamp" + DateUtil.now() + "version" + "1.0" + token;
         str = MD5.md5(str).toUpperCase();

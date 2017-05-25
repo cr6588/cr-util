@@ -44,8 +44,7 @@ public class ExcelUtilTest {
             POIFSFileSystem fs = new POIFSFileSystem(is);
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             int sheetCount = wb.getNumberOfSheets();
-            String[] logName = { "订单列表" };
-//            String[] logName = { "区域运费" };
+            String[] logName = { "物流运单号" };
             List<String> existTable = new ArrayList<>();
             Map<String, String> existTableName = new HashMap<>();
             for (int i = 0; i < sheetCount; i++) {
@@ -80,9 +79,9 @@ public class ExcelUtilTest {
                             }
                             if(canStart) {
                                 String columnName = row.getCell(1).getStringCellValue().trim();
-                                if(columnName.equalsIgnoreCase("createUser") || columnName.equalsIgnoreCase("createTime") ||columnName.equalsIgnoreCase("updateUser") ||columnName.equalsIgnoreCase("updateTime")){
-                                    continue;
-                                }
+//                                if(columnName.equalsIgnoreCase("createUser") || columnName.equalsIgnoreCase("createTime") ||columnName.equalsIgnoreCase("updateUser") ||columnName.equalsIgnoreCase("updateTime")){
+//                                    continue;
+//                                }
                                 String type = row.getCell(3).getStringCellValue().trim();
                                 String length = getStringCellValue(row.getCell(4));
                                 if(!length.trim().equals("")) {
