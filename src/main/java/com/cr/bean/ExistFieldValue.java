@@ -19,4 +19,6 @@ public class ExistFieldValue {
     private long chanelId;
     private ExistField field;
     private Object value;
+//    private ExistField parent;
+//    private List<ExistField> childs;
 }

@@ -13,8 +13,6 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-import com.alibaba.fastjson.JSONObject;
-
 public class SyncSession {
 
     /**

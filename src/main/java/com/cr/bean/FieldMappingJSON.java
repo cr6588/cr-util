@@ -22,8 +22,22 @@ public class FieldMappingJSON {
     String key;
     // 层级
     int level;
+    //父级
     FieldMappingJSON parent;
     // 类型 object,array,field
     String type;
+    //是否是fieldVo中other的映射关系
+    boolean isOther = false;
+    //子集
     List<FieldMappingJSON> childs;
+    public FieldMappingJSON(long id, String attribue, String key, int level, FieldMappingJSON parent, String type, List<FieldMappingJSON> childs) {
+        super();
+        this.id = id;
+        this.attribue = attribue;
+        this.key = key;
+        this.level = level;
+        this.parent = parent;
+        this.type = type;
+        this.childs = childs;
+    }
 }

@@ -34,11 +34,11 @@ public class FieldVo {
     String sellPriceCurrency; // 售价货币
     String salesPlatform; // 销售平台
     String trackingNumber; // 跟踪号
-    List<ExistFieldValue> existFieldsValues; // 额外属性值
     String remark; // 备注
+    String other; //json字符串
 
     public FieldVo(String packageId, ShipAddress shipToAddress, ShipAddress shipFromAddress, int weight, double length, double width, double height, List<Sku> skus,
-        List<ExistFieldValue> existFieldsValues, String remark) {
+        String other, String remark) {
         super();
         this.packageId = packageId;
         this.shipToAddress = shipToAddress;
@@ -48,7 +48,7 @@ public class FieldVo {
         this.width = width;
         this.height = height;
         this.skus = skus;
-        this.existFieldsValues = existFieldsValues;
+        this.other = other;
         this.remark = remark;
     }
 

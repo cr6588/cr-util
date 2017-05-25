@@ -44,8 +44,8 @@ public class ExcelUtilTest {
             POIFSFileSystem fs = new POIFSFileSystem(is);
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             int sheetCount = wb.getNumberOfSheets();
-            String[] logName = { "订单列表" };
-//            String[] logName = { "区域运费" };
+            String[] logName = { "物流匹配规则条件" };
+//            String[] logName = s{ "区域运费" };
             List<String> existTable = new ArrayList<>();
             Map<String, String> existTableName = new HashMap<>();
             for (int i = 0; i < sheetCount; i++) {

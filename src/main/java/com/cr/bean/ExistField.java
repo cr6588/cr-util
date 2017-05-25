@@ -22,9 +22,6 @@ public class ExistField {
     private int type; // 类型 input,select,datetime...
     private String options; // 可选值 [{key:显示名称},{key:显示名称}] 如果数据来源必选是物流公司需要额外在考虑
     private boolean required = true; // 是否必填
-
-    private ExistField parent;
-    private List<ExistField> childs;
     private String ObjectType; // 对象类型field, Object, list
 
     public ExistField(long id, long logId, long chanelId, String key, String name, int type, String options, boolean required) {

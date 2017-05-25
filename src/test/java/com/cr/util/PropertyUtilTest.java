@@ -3,12 +3,10 @@ package com.cr.util;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.Iterator;
-import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.junit.Test;
 
-import com.cr.util.PropertyUtil;
 import com.cr.util.db.JDBC;
 
 public class PropertyUtilTest {
