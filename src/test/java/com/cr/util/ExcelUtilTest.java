@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * create in 2017年04月20日
  * @category 根据excel内容生成sql语句
- * @auther chenyi
+ * @author chenyi
  */
 public class ExcelUtilTest {
 
@@ -44,7 +44,7 @@ public class ExcelUtilTest {
             POIFSFileSystem fs = new POIFSFileSystem(is);
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             int sheetCount = wb.getNumberOfSheets();
-            String[] logName = { "物流运单号" };
+            String[] logName = { "平台认可物流" };
             List<String> existTable = new ArrayList<>();
             Map<String, String> existTableName = new HashMap<>();
             for (int i = 0; i < sheetCount; i++) {

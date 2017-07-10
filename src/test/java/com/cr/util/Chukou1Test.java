@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * create in 2017年05月05日
  * @category TODO
- * @auther chenyi
+ * @author chenyi
  */
 public class Chukou1Test {
 

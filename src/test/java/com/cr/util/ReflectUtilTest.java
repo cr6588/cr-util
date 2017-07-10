@@ -12,7 +12,7 @@ import com.cr.bean.ExistField;
 /**
  * create in 2017年05月25日
  * @category TODO
- * @auther chenyi
+ * @author chenyi
  */
 public class ReflectUtilTest {
 

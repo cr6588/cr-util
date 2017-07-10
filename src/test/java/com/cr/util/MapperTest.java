@@ -22,10 +22,11 @@ import org.junit.Test;
 /**
  * create in 2017年04月20日
  * @category mybatis接口xml生成
- * @auther chenyi
+ * @author chenyi
  */
 public class MapperTest {
 
+    private static final boolean isNeedComId = false;
     @Test
     public void test() {
         try {
@@ -250,7 +251,7 @@ public class MapperTest {
         str += "        <where>" + enter;
         str += "            `deleted` = ${@com.sjdf.erp.common.dictionary.bean.WhetherState@NO}" + enter;
         for (String column : columns) {
-            str += "            <if test=\"" + column + " != null\"> and " + column + " = #{" + column + "}</if>" + enter;
+            str += "            <if test=\"" + column + " != null\"> and `" + column + "` = #{" + column + "}</if>" + enter;
         }
         str += "        </where>" + enter;
         str += "    </sql>" + enter;
@@ -268,9 +269,13 @@ public class MapperTest {
         str += "    <update id=\"delete" + className + "\" parameterType=\"map\">" + enter;
         str += "        update `" + tableName + "`" + enter;
         str += "            set `deleted` = ${@com.sjdf.erp.common.dictionary.bean.WhetherState@YES}" + enter;
-        str += "        where id = #{id} and comId = #{comId}" + enter;
+        str += "        where id = #{id}" + getComIdStr() + enter;
         str += "    </update>" + enter;
         return str;
+    }
+
+    private String getComIdStr() {
+        return isNeedComId ? " and comId = #{comId}" : "";
     }
 
     /**
@@ -290,9 +295,9 @@ public class MapperTest {
             String column = columns.get(i);
             if (!column.equals("id")) {
                 if (i == 1) {
-                    str += column + " = #{" + column + "}";
+                    str += "`" + column + "` = #{" + column + "}";
                 } else {
-                    str += "            " + column + " = #{" + column + "}";
+                    str += "            `" + column + "` = #{" + column + "}";
                 }
                 if (i != columns.size() - 1) {
                     str += ",";
@@ -300,7 +305,7 @@ public class MapperTest {
                 str += enter;
             }
         }
-        str += "        where id = #{id} and comId = #{comId}" + enter;
+        str += "        where id = #{id}" + getComIdStr() + enter;
         str += "    </update>" + enter;
         return str;
     }
@@ -315,7 +320,7 @@ public class MapperTest {
      */
     private String createAddXml(String className, String classNameLowerCaseFirstWord, String tableName, List<String> columes) {
         String str = "";
-        str += "    <insert id=\"add" + className + "\" parameterType=\"" + classNameLowerCaseFirstWord + "\" keyProperty=\"id\">" + enter;
+        str += "    <insert id=\"save" + className + "\" parameterType=\"" + classNameLowerCaseFirstWord + "\" keyProperty=\"id\">" + enter;
         str += "        insert into `" + tableName + "` (" + enter;
         str += "            <include refid=\"" + classNameLowerCaseFirstWord + "ColumnList\"/>" + enter;
         str += "        ) values (" + enter;
@@ -347,14 +352,14 @@ public class MapperTest {
     private String createColumnListXml(String className, List<String> columes) {
         String str = "    <sql id=\"" + className + "ColumnList\">" + enter;
         for (int i = 0; i < columes.size(); i++) {
-            if (i % 10 == 0) {
+            if (i % 10 == 0 || i == 0) {
                 str += "       ";
             }
             str += " `" + columes.get(i) + "`";
             if (i != columes.size() - 1) {
                 str += ",";
             }
-            if (i % 10 == 0 && i != 0) {
+            if ((i + 1) % 10 == 0 && i != 0) {
                 str += enter;
             }
         }

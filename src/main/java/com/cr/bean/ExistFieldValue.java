@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 /**
  * create in 2017年05月06日
  * @category TODO
- * @auther chenyi
+ * @author chenyi
  */
 @Data
 @NoArgsConstructor

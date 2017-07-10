@@ -23,7 +23,7 @@ import ognl.OgnlException;
 /**
  * create in 2017年05月06日
  * @category TODO
- * @auther chenyi
+ * @author chenyi
  */
 public class EachTest {
 

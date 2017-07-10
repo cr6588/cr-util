@@ -10,7 +10,7 @@ import org.junit.Test;
 /**
  * create in 2017年04月20日
  * @category 生成模块建表存储过程
- * @auther chenyi
+ * @author chenyi
  */
 public class Database2ModuleProcedureTest {
 

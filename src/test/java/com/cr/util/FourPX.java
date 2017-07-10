@@ -15,7 +15,7 @@ import org.junit.Test;
 /**
  * create in 2017年05月04日
  * @category TODO
- * @auther chenyi
+ * @author chenyi
  */
 public class FourPX {
 

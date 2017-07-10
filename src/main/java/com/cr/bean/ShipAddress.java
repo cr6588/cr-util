@@ -5,7 +5,7 @@ import com.cr.annotation.required;
 /**
  * create in 2017年05月06日
  * @category 地址，联系人
- * @auther chenyi
+ * @author chenyi
  */
 public class ShipAddress {
     @required

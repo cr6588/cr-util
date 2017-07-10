@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 /**
  * create in 2017年05月06日
  * @category 属性映射json
- * @auther chenyi
+ * @author chenyi
  */
 @Data
 @NoArgsConstructor

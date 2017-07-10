@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * create in 2017年05月06日
- * @category @auther chenyi
+ * @category 
+ * @author chenyi
  */
 @Data
 @NoArgsConstructor

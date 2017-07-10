@@ -15,7 +15,7 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * create in 2017年04月26日
  * @category TODO
- * @auther chenyi
+ * @author chenyi
  */
 public class LogisticsTest {
 
