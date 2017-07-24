@@ -67,14 +67,14 @@ public class LogisticsTest {
         String url = "http://openapi.sandbox.winit.com.cn/openapi/service";
         HttpPost post = new HttpPost(url);
         HttpUtil.setBrowerAttrHeaders(post, true);
-        StringEntity stringEntity = new StringEntity(addPickupService());
+//        StringEntity stringEntity = new StringEntity(addPickupService());
+//        post.setEntity(stringEntity);
+//        String str = HttpUtil.responseEntity2Str(httpClient.execute(post));
+//        System.out.println(str);
+
+        StringEntity stringEntity = new StringEntity(getByPickupService());
         post.setEntity(stringEntity);
         String str = HttpUtil.responseEntity2Str(httpClient.execute(post));
-        System.out.println(str);
-
-        stringEntity = new StringEntity(getByPickupService());
-        post.setEntity(stringEntity);
-        str = HttpUtil.responseEntity2Str(httpClient.execute(post));
         System.out.println(str);
     }
 
@@ -82,7 +82,7 @@ public class LogisticsTest {
         JSONObject param = new JSONObject();
         String action = "ums.address.add";
         param.put("action", action);
-        param.put("app_key", "support@jtongi.cn");
+        param.put("app_key", "rebecca");
         JSONObject dataValue = new JSONObject();
         dataValue.put("code", "test110");
         dataValue.put("cityCode", "SHENZHEN");
@@ -111,32 +111,29 @@ public class LogisticsTest {
         System.out.println(param.toJSONString());
         return param.toJSONString();
     }
-
     public String getByPickupService() {
         JSONObject param = new JSONObject();
         String action = "ums.address.getByPickupService";
         param.put("action", action);
-        param.put("app_key", "support@jtongi.cn");
+        param.put("app_key", "rebecca");
         JSONObject dataValue = new JSONObject();
         dataValue.put("dispatchType", "C");
         dataValue.put("winitProductCode", "USCN00001");
         param.put("data", dataValue);
         param.put("format", "json");
+        param.put("language", "zh_CN");
         param.put("platform", "SELLERERP");
+        param.put("sign", getSign(action, dataValue.toJSONString()));
         param.put("sign_method", "md5");
         param.put("timestamp", DateUtil.now());
         param.put("version", "1.0");
-        param.put("sign", getSign(action, dataValue.toJSONString()));
-        param.put("language", "zh_CN");
         System.out.println(param.toJSONString());
         return param.toJSONString();
     }
     public String getSign(String action, String dataValue) {
         //签名串 = token + action + actionValue + app_key + app_keyValue + data + dataValue + format + formatValue + platform + platformValue + sign_method + sign_methodValue + timestamp + timestampValue + version + versionValue + token
         String str = "";
-        String token = "89435277FA3BA272DE795559998E";
-//        String token = "8078D70FBA1C72DA1F9BB4F96F0226C4";
-//        str += token + "action" + action + "app_key" + "support@jtongi.cn"
+        String token = "89435277FA3BA272DE795559998E-";
         str += token + "action" + action + "app_key" + "rebecca"
             + "data" + dataValue
             + "format" + "json" + "platform" + "SELLERERP" + "sign_method" + "md5" + "timestamp" + DateUtil.now() + "version" + "1.0" + token;

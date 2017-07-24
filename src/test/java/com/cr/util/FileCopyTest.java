@@ -14,7 +14,7 @@ public class FileCopyTest {
 
     @Test
     public void fileCopyTest() {
-        String path = "D:\\git\\erp\\erp-logistics\\src\\main\\java\\fpx\\api";
+        String path = "D:\\git\\erp\\doc\\sql\\temp";
         fileGbkToUtf8(path);
     }
 
@@ -34,7 +34,7 @@ public class FileCopyTest {
                 OutputStreamWriter osw = null;
                 try {
                     fis = new FileInputStream(files[i]);
-                    isr = new InputStreamReader(fis, "gbk");
+                    isr = new InputStreamReader(fis, "gb2312");//gb2312
                     fos = new FileOutputStream(fileCopy);
                     osw = new OutputStreamWriter(fos, "utf8");
 //                    byte[] bytes = new byte[1024 * 4];

@@ -12,7 +12,7 @@ public class RandomUtil {
      * @return 随机字符串
      */
     public static String getStr(int length) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
             sb.append(allChar.charAt(random.nextInt(letterChar.length())));
         }
@@ -24,7 +24,7 @@ public class RandomUtil {
      * @return 随机字符串
      */
     public static String getNumStr(int length) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
             sb.append(numberChar.charAt(random.nextInt(numberChar.length())));
         }
@@ -36,9 +36,10 @@ public class RandomUtil {
      * @return 随机字符串
      */
     public static String getChineseStr(int length) {
-        String zhUnicodeStart = "4e00", zhUnicodeEnd = "9fa5";
+        String zhUnicodeStart = "4e00";
+        String zhUnicodeEnd = "9fa5";
         int count = Integer.parseInt(zhUnicodeEnd, 16) - Integer.parseInt(zhUnicodeStart, 16) + 1;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
             sb.append(Integer.toHexString(random.nextInt(count) + Integer.parseInt(zhUnicodeStart, 16)));
         }
@@ -52,9 +53,10 @@ public class RandomUtil {
      */
     public static String getMaxLenthChineseStr(int maxLenth) {
         int length = random.nextInt(maxLenth) + 1;
-        String zhUnicodeStart = "4e00", zhUnicodeEnd = "9fa5";
+        String zhUnicodeStart = "4e00";
+        String zhUnicodeEnd = "9fa5";
         int count = Integer.parseInt(zhUnicodeEnd, 16) - Integer.parseInt(zhUnicodeStart, 16) + 1;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
             sb.append((char)(random.nextInt(count) + Integer.parseInt(zhUnicodeStart, 16)));
         }
