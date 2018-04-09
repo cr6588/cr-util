@@ -2,6 +2,7 @@ package com.cr.util.db;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Date;
 import java.util.Random;
 
@@ -109,4 +110,91 @@ public class JdbcTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void delDbTest() {
+        JDBC jdbc = new JDBC("jdbc:mysql://118.123.12.120:3306/test?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
+        String sql ="show databases;";
+        jdbc.setSql(sql);
+        try {
+            PreparedStatement pst = jdbc.getPstmt();
+            ResultSet rs = pst.executeQuery();
+            StringBuilder sb = new StringBuilder();
+            while (rs.next()) {
+                String dbName = rs.getString(1);
+                if(dbName.startsWith("db_") && dbName.compareTo("db_37849031920750") > 0) {
+                    sb.append("drop database " + dbName + ";");
+                }
+            }
+            pst.execute(sb.toString());
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void truncateTableTest() {
+        JDBC jdbc = new JDBC("jdbc:mysql://118.123.12.120:3306/test?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
+        String sql ="show databases;";
+        jdbc.setSql(sql);
+        try {
+            PreparedStatement pst = jdbc.getPstmt();
+            ResultSet rs = pst.executeQuery();
+            StringBuilder sb = new StringBuilder();
+            while (rs.next()) {
+                String dbName = rs.getString(1);
+                if(dbName.startsWith("db_") && dbName.compareTo("db_45892611181678") > 0) {
+                    String showTable = "show tables from " + dbName + ";";
+                    ResultSet tableRs = jdbc.getCon().prepareStatement(showTable).executeQuery();
+                    while(tableRs.next()) {
+                        String tableName = tableRs.getString(1);
+                        jdbc.getCon().prepareStatement("TRUNCATE " + dbName + "." + tableName + ";").execute();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void delAllTableTest() {
+        JDBC jdbc = new JDBC("jdbc:mysql://118.123.12.120:3306/erp?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
+//        JDBC jdbc = new JDBC("jdbc:mysql://localhost:3306/base?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
+        String sql ="show tables;";
+        jdbc.setSql(sql);
+        try {
+            PreparedStatement pst = jdbc.getPstmt();
+            ResultSet rs = pst.executeQuery();
+            StringBuilder sb = new StringBuilder();
+            while (rs.next()) {
+                String tableName = rs.getString(1);
+                sb.append("drop table " + tableName + ";");
+            }
+            pst.execute(sb.toString());
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void callProTest() {
+        JDBC jdbc = new JDBC("jdbc:mysql://localhost:3306/base?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "dev", "dev");
+        String sql ="CALL create_warehouse_table ('base', '33594154876331');";
+        jdbc.setSql(sql);
+        try {
+            PreparedStatement pst = jdbc.getPstmt();
+            pst.execute();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    //CALL base.create_order_table ('db_33594154843563', '33594154876331');
+    //CALL base.create_order_table ('db_33594154843563', '33594154876331');
+    
 }

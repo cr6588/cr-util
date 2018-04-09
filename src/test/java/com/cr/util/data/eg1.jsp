@@ -389,104 +389,104 @@ function loadAddress($obj, id) {
                         <div class="tag-choose-box clearfix mt15">
                             <div class="tag-large fl"><img src="${staticPath}/images/system/tag/1.jpg" width="280"></div>
                             <div class="tag-small-box fr" id="thumbnail">
-                                <ul>
-                                    <li class="tag-current">
-                                        <a href="${staticPath}/images/system/tag/1.jpg">
-                                            <img src="${staticPath}/images/system/tag/1.jpg" width="70">
-                                            <p class="ellipsis">快越达广州平邮小包</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/2.jpg">
-                                            <img src="${staticPath}/images/system/tag/2.jpg" width="70">
-                                            <p class="ellipsis">中国邮政江苏小包</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/3.jpg">
-                                            <img src="${staticPath}/images/system/tag/3.jpg" width="70">
-                                            <p class="ellipsis">E邮宝-Qinli</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/4.jpg">
-                                            <img src="${staticPath}/images/system/tag/4.jpg" width="70">
-                                            <p class="ellipsis">美国邮政</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/5.jpg">
-                                            <img src="${staticPath}/images/system/tag/5.jpg" width="70">
-                                            <p class="ellipsis">出口易专线</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/6.jpg">
-                                            <img src="${staticPath}/images/system/tag/6.jpg" width="70">
-                                            <p class="ellipsis">顺丰平邮</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/7.jpg">
-                                            <img src="${staticPath}/images/system/tag/7.jpg" width="70">
-                                            <p class="ellipsis">线下E邮宝--欧洲美洲经济包</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/8.jpg">
-                                            <img src="${staticPath}/images/system/tag/8.jpg" width="70">
-                                            <p class="ellipsis">中邮专线标签</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/1.jpg">
-                                            <img src="${staticPath}/images/system/tag/1.jpg" width="70">
-                                            <p class="ellipsis">快越达广州平邮小包</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/2.jpg">
-                                            <img src="${staticPath}/images/system/tag/2.jpg" width="70">
-                                            <p class="ellipsis">中国邮政江苏小包</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/3.jpg">
-                                            <img src="${staticPath}/images/system/tag/3.jpg" width="70">
-                                            <p class="ellipsis">E邮宝-Qinli</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/4.jpg">
-                                            <img src="${staticPath}/images/system/tag/4.jpg" width="70">
-                                            <p class="ellipsis">美国邮政</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/5.jpg">
-                                            <img src="${staticPath}/images/system/tag/5.jpg" width="70">
-                                            <p class="ellipsis">出口易专线</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/6.jpg">
-                                            <img src="${staticPath}/images/system/tag/6.jpg" width="70">
-                                            <p class="ellipsis">顺丰平邮</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/7.jpg">
-                                            <img src="${staticPath}/images/system/tag/7.jpg" width="70">
-                                            <p class="ellipsis">线下E邮宝--欧洲美洲经济包</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${staticPath}/images/system/tag/8.jpg">
-                                            <img src="${staticPath}/images/system/tag/8.jpg" width="70">
-                                            <p class="ellipsis">中邮专线标签</p>
-                                        </a>
-                                    </li>
-                                </ul>
+<!--                                 <ul> -->
+<!--                                     <li class="tag-current"> -->
+<%--                                         <a href="${staticPath}/images/system/tag/1.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/1.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">快越达广州平邮小包</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/2.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/2.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">中国邮政江苏小包</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/3.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/3.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">E邮宝-Qinli</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/4.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/4.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">美国邮政</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/5.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/5.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">出口易专线</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/6.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/6.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">顺丰平邮</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/7.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/7.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">线下E邮宝--欧洲美洲经济包</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/8.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/8.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">中邮专线标签</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/1.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/1.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">快越达广州平邮小包</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/2.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/2.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">中国邮政江苏小包</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/3.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/3.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">E邮宝-Qinli</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/4.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/4.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">美国邮政</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/5.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/5.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">出口易专线</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/6.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/6.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">顺丰平邮</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/7.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/7.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">线下E邮宝--欧洲美洲经济包</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<%--                                         <a href="${staticPath}/images/system/tag/8.jpg"> --%>
+<%--                                             <img src="${staticPath}/images/system/tag/8.jpg" width="70"> --%>
+<!--                                             <p class="ellipsis">中邮专线标签</p> -->
+<!--                                         </a> -->
+<!--                                     </li> -->
+<!--                                 </ul> -->
                             </div>
                         </div>
                     </div>
@@ -494,7 +494,7 @@ function loadAddress($obj, id) {
             </div>
             <div class="b-dash-bor pb5 clearfix">
                 <h5 class="f16 ml10 mt10 lh30">
-                    回邮地址<span class="c-red f13 ml10">(线上发货必须用英文填写)</span><a href="#" class="site-bg radius3 bg-green cfff ml10 addAddress"><i class="icon iconfont erp-add mr3 f12"></i>新增</a>
+                    回邮地址<span class="c-red f13 ml10">线上发货必须用英文填写</span><a href="#" class="site-bg radius3 bg-green cfff ml10 addAddress"><i class="icon iconfont erp-add mr3 f12"></i>新增</a>
                     <p class="fr mr10">
                         <select class="h30-select-ql blueFocus w150 fr f12 selectAddress">
                             <option value="">选择回邮地址</option>
@@ -545,7 +545,7 @@ function loadAddress($obj, id) {
                         <div class="fl ml10 f13"></div>
                     </li>
                     <li class="w50p">
-                        <b class="fl tr w120 f13">移动电话：</b>
+                        <b class="fl tr w120 f13">手机：</b>
                         <div class="fl ml10 f13"></div>
                     </li>
                     <li class="w50p">
@@ -561,7 +561,7 @@ function loadAddress($obj, id) {
             
             <div class="clearfix">
                 <h5 class="f16 ml10 mt10 lh30">
-                    揽货地址<span class="c-red f13 ml10">(必须用英文填写)</span><a href="#" class="site-bg radius3 bg-green cfff ml10 addAddress"><i class="icon iconfont erp-add mr3 f12"></i>新增</a>
+                    揽货地址<span class="c-red f13 ml10">必须用英文填写</span><a href="#" class="site-bg radius3 bg-green cfff ml10 addAddress"><i class="icon iconfont erp-add mr3 f12"></i>新增</a>
                     <p class="fr mr10">
                         <select class="h30-select-ql blueFocus w150 fr selectAddress">
                             <option value="">选择揽货地址</option>
@@ -612,7 +612,7 @@ function loadAddress($obj, id) {
                         <div class="fl ml10 f13"></div>
                     </li>
                     <li class="w50p">
-                        <b class="fl tr w120 f13">移动电话：</b>
+                        <b class="fl tr w120 f13">手机：</b>
                         <div class="fl ml10 f13"></div>
                     </li>
                     <li class="w50p">
@@ -662,7 +662,7 @@ function loadAddress($obj, id) {
         <div class="fl ml10 f13"><span name="telephone">广东省 惠州市</span></div>
     </li>
     <li class="w50p">
-        <b class="fl tr w120 f13">移动电话：</b>
+        <b class="fl tr w120 f13">手机：</b>
         <div class="fl ml10 f13"><span name="mobile">广东省 惠州市</span></div>
     </li>
     <li class="w50p">
@@ -713,7 +713,7 @@ function loadAddress($obj, id) {
         <div class="fl ml10 f13"><input type="text" class="h28-text blueFocus w250" placeholder="" name="telephone"></div>
     </li>
     <li class="w50p">
-        <b class="fl tr w120 f13">移动电话：</b>
+        <b class="fl tr w120 f13">手机：</b>
         <div class="fl ml10 f13"><input type="text" class="h28-text blueFocus w250" placeholder="" name="mobile"></div>
     </li>
     <li class="w50p">
@@ -780,7 +780,7 @@ function loadAddress($obj, id) {
                 </div>
             </li>
             <li class="w50p">
-                <b class="fl tr w90 f13"><span class="c-red mr3">*</span>移动电话：</b>
+                <b class="fl tr w90 f13"><span class="c-red mr3">*</span>手机：</b>
                 <div class="fl ml10 f13">
                     <input type="text" class="h28-text blueFocus w200" value="13874125489" name="mobile">
                 </div>

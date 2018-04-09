@@ -55,6 +55,10 @@ public class LogisticsTest {
         System.out.println(str);
     }
 
+    String token = "89435277FA3BA272DE795559998E-";
+    String app_key = "rebecca";
+//    String token = "8078D70FBA1C72DA1F9BB4F96F0226C4";
+//    String app_key = "support@jtongi.cn";
     /**
      * @throws Exception 
      * @throws IOException 
@@ -64,6 +68,7 @@ public class LogisticsTest {
     @Test
     public void winitTest() throws ClientProtocolException, IOException, Exception {
         HttpClient httpClient = HttpClients.createDefault();
+//        String url = "http://openapi.winit.com.cn/openapi/service";
         String url = "http://openapi.sandbox.winit.com.cn/openapi/service";
         HttpPost post = new HttpPost(url);
         HttpUtil.setBrowerAttrHeaders(post, true);
@@ -73,16 +78,16 @@ public class LogisticsTest {
 //        System.out.println(str);
 
         StringEntity stringEntity = new StringEntity(getByPickupService());
+//        StringEntity stringEntity = new StringEntity(getWinitProductList());
         post.setEntity(stringEntity);
         String str = HttpUtil.responseEntity2Str(httpClient.execute(post));
         System.out.println(str);
     }
-
     public String addPickupService() {
         JSONObject param = new JSONObject();
         String action = "ums.address.add";
         param.put("action", action);
-        param.put("app_key", "rebecca");
+        param.put("app_key", app_key);
         JSONObject dataValue = new JSONObject();
         dataValue.put("code", "test110");
         dataValue.put("cityCode", "SHENZHEN");
@@ -112,10 +117,10 @@ public class LogisticsTest {
         return param.toJSONString();
     }
     public String getByPickupService() {
-        JSONObject param = new JSONObject();
+        JSONObject param = new JSONObject(true);
         String action = "ums.address.getByPickupService";
         param.put("action", action);
-        param.put("app_key", "rebecca");
+        param.put("app_key", app_key);
         JSONObject dataValue = new JSONObject();
         dataValue.put("dispatchType", "C");
         dataValue.put("winitProductCode", "USCN00001");
@@ -125,18 +130,40 @@ public class LogisticsTest {
         param.put("platform", "SELLERERP");
         param.put("sign", getSign(action, dataValue.toJSONString()));
         param.put("sign_method", "md5");
-        param.put("timestamp", DateUtil.now());
+        param.put("timestamp", date);
         param.put("version", "1.0");
         System.out.println(param.toJSONString());
         return param.toJSONString();
     }
+
+    String date = DateUtil.now();
+    public String getWinitProductList() {
+        JSONObject param = new JSONObject(true); //数序输出
+        String action = "winitProduct.list";
+        param.put("action", action);
+        param.put("app_key", app_key);
+        JSONObject dataValue = new JSONObject();
+        param.put("data", dataValue);
+        param.put("format", "json");
+        param.put("language", "zh_CN");
+        param.put("platform", "SELLERERP");
+        param.put("sign", getSign(action, dataValue.toJSONString()));
+        param.put("sign_method", "md5");
+        param.put("timestamp", date);
+        param.put("version", "1.0");
+
+        System.out.println(param.toJSONString());
+        return param.toJSONString();
+    }
+
     public String getSign(String action, String dataValue) {
         //签名串 = token + action + actionValue + app_key + app_keyValue + data + dataValue + format + formatValue + platform + platformValue + sign_method + sign_methodValue + timestamp + timestampValue + version + versionValue + token
         String str = "";
-        String token = "89435277FA3BA272DE795559998E-";
-        str += token + "action" + action + "app_key" + "rebecca"
+        System.out.println(date);
+        str += token + "action" + action + "app_key" + app_key
             + "data" + dataValue
-            + "format" + "json" + "platform" + "SELLERERP" + "sign_method" + "md5" + "timestamp" + DateUtil.now() + "version" + "1.0" + token;
+            + "format" + "json" + "platform" + "SELLERERP" + "sign_method" + "md5" + "timestamp" + date + "version" + "1.0" + token;
+        System.out.println(str);
         str = MD5.md5(str).toUpperCase();
         System.out.println(str);
         return str;

@@ -26,7 +26,10 @@ import org.junit.Test;
  */
 public class MapperTest {
 
+    private static final String beanName = "PubUserCommonOperate";
+    private static final String beanCnName = "常用操作";
     private static final boolean isNeedComId = false;
+    private static final boolean isNeedDeleted = false;
     @Test
     public void test() {
         try {
@@ -48,7 +51,6 @@ public class MapperTest {
                 tables.put(tableName, columns);
             }
             createMapperXml(tables);
-            createMapperDao(tables);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,26 +117,37 @@ public class MapperTest {
         return null;
     }
 
-    private void createMapperDao(Map<String, List<String>> tables) {
-        String dao = "";
-        dao += "package com.sjdf.erp.logistics.dao;" + enter + enter;
-        dao += "import java.util.List;" + enter;
-        dao += "import java.util.Map;" + enter;
-        dao += "import com.sjdf.erp.facade.vo.PagerInfo;" + enter;
-        dao += "public interface LogisticsDao {" + enter;
+    private String createMapperDao(String beanDesc, String beanName) {
         String daoExample = FileUtil.readTxtFile2StrByStringBuilder(this.getClass().getResource("").getPath() + "/data/LogisticsDao.txt");
-        Iterator<Entry<String, List<String>>> it = tables.entrySet().iterator();
-        Map<String, String> tableZhMap = getTableZhCn();
-        for (; it.hasNext();) {
-            Entry<String, List<String>> entry = it.next();
-            String tableName = entry.getKey();
-            String className = getClassNameByTableName(tableName);
-            String lowerClassName = getLowerClassName(className);
-            dao += daoExample.replace("PubLogisticsCompany", className).replace("pubLogisticsCompany", lowerClassName).replace("物流公司", tableZhMap.get(tableName));
-            // break;
-        }
-        dao += "}";
-//         System.out.println(dao);
+        String daoStr = daoExample.replace("物流公司", beanDesc).replace("PubLogisticsCompany", beanName).replaceAll("pubLogisticsCompany", beanName.toLowerCase().charAt(0) + beanName.substring(1));
+        return daoStr;
+    }
+
+    @Test
+    public void createMapperDaoTest() {
+        System.out.println(createMapperDao(beanCnName, beanName));
+    }
+
+    private String createService(String beanDesc, String beanName, String serviceName) {
+        String daoExample = FileUtil.readTxtFile2StrByStringBuilder(this.getClass().getResource("").getPath() + "/data/LogisticsService.txt");
+        String daoStr = daoExample.replace("物流公司", beanDesc).replace("PubLogisticsCompany", beanName).replaceAll("pubLogisticsCompany", beanName.toLowerCase().charAt(0) + beanName.substring(1));
+        return daoStr.replace("logisticsDao", serviceName);
+    }
+
+    @Test
+    public void createServiceTest() {
+        System.out.println(createService(beanCnName, beanName, "userDao"));
+    }
+
+    private String createFacade(String beanDesc, String beanName, String serviceName) {
+        String daoExample = FileUtil.readTxtFile2StrByStringBuilder(this.getClass().getResource("").getPath() + "/data/LogisticsFacade.txt");
+        String daoStr = daoExample.replace("物流公司", beanDesc).replace("PubLogisticsCompany", beanName).replaceAll("pubLogisticsCompany", beanName.toLowerCase().charAt(0) + beanName.substring(1));
+        return daoStr.replace("logisticsSer", serviceName);
+    }
+
+    @Test
+    public void createFacadeTest() {
+        System.out.println(createFacade(beanCnName, beanName, "userService"));
     }
 
     public String getClassNameByTableName(String tableName) {
@@ -249,7 +262,9 @@ public class MapperTest {
         String str = "";
         str += "    <sql id=\"" + classNameLowerCaseFirstWord + "SelectCondition\">" + enter;
         str += "        <where>" + enter;
-        str += "            `deleted` = ${@com.sjdf.erp.common.dictionary.bean.WhetherState@NO}" + enter;
+        if(isNeedDeleted) {
+            str += "            `deleted` = ${@com.sjdf.erp.common.dictionary.bean.WhetherState@NO}" + enter;
+        }
         for (String column : columns) {
             str += "            <if test=\"" + column + " != null\"> and `" + column + "` = #{" + column + "}</if>" + enter;
         }
@@ -265,12 +280,20 @@ public class MapperTest {
      * @return
      */
     private String createDelXml(String className, String tableName) {
+        if(isNeedDeleted) {
+            String str = "";
+            str += "    <update id=\"delete" + className + "\" parameterType=\"map\">" + enter;
+            str += "        update `" + tableName + "`" + enter;
+            str += "            set `deleted` = ${@com.sjdf.erp.common.dictionary.bean.WhetherState@YES}" + enter;
+            str += "        where id = #{id}" + getComIdStr() + enter;
+            str += "    </update>" + enter;
+            return str;
+        }
         String str = "";
-        str += "    <update id=\"delete" + className + "\" parameterType=\"map\">" + enter;
-        str += "        update `" + tableName + "`" + enter;
-        str += "            set `deleted` = ${@com.sjdf.erp.common.dictionary.bean.WhetherState@YES}" + enter;
+        str += "    <delete id=\"delete" + className + "\" parameterType=\"map\">" + enter;
+        str += "        delete from `" + tableName + "`" + enter;
         str += "        where id = #{id}" + getComIdStr() + enter;
-        str += "    </update>" + enter;
+        str += "    </delete>" + enter;
         return str;
     }
 
@@ -336,7 +359,9 @@ public class MapperTest {
                 str += ",";
             }
         }
-        str += ", ${@com.sjdf.erp.common.dictionary.bean.WhetherState@NO}";
+        if(isNeedDeleted) {
+            str += ", ${@com.sjdf.erp.common.dictionary.bean.WhetherState@NO}";
+        }
         str += enter;
         str += "        )" + enter;
         str += "    </insert>" + enter;
@@ -363,7 +388,9 @@ public class MapperTest {
                 str += enter;
             }
         }
-        str += ", `deleted`";
+        if(isNeedDeleted) {
+            str += ", `deleted`";
+        }
         str += enter;
         str += "    </sql>" + enter;
         return str;
