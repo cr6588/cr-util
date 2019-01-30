@@ -57,8 +57,6 @@ public class LogisticsTest {
 
     String token = "89435277FA3BA272DE795559998E-";
     String app_key = "rebecca";
-//    String token = "8078D70FBA1C72DA1F9BB4F96F0226C4";
-//    String app_key = "support@jtongi.cn";
     /**
      * @throws Exception 
      * @throws IOException 

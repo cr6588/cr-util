@@ -26,15 +26,15 @@ import org.junit.Test;
  */
 public class MapperTest {
 
-    private static final String beanName = "PubUserCommonOperate";
-    private static final String beanCnName = "常用操作";
-    private static final boolean isNeedComId = false;
+    private static final String beanName = "PubCollectProduct";
+    private static final String beanCnName = "采集商品";
+    private static final boolean isNeedComId = true;
     private static final boolean isNeedDeleted = false;
     @Test
     public void test() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mappertest?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "dev", "dev");
+            Connection con = DriverManager.getConnection("jdbc:mysql://mysql.cr6588.com:3306/test?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
             String sql = "show tables;";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -136,7 +136,7 @@ public class MapperTest {
 
     @Test
     public void createServiceTest() {
-        System.out.println(createService(beanCnName, beanName, "userDao"));
+        System.out.println(createService(beanCnName, beanName, "collectProductDao"));
     }
 
     private String createFacade(String beanDesc, String beanName, String serviceName) {

@@ -113,7 +113,7 @@ public class JdbcTest {
 
     @Test
     public void delDbTest() {
-        JDBC jdbc = new JDBC("jdbc:mysql://118.123.12.120:3306/test?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
+        JDBC jdbc = new JDBC("jdbc:mysql://127.0.0.1:3306/test?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
         String sql ="show databases;";
         jdbc.setSql(sql);
         try {
@@ -122,7 +122,7 @@ public class JdbcTest {
             StringBuilder sb = new StringBuilder();
             while (rs.next()) {
                 String dbName = rs.getString(1);
-                if(dbName.startsWith("db_") && dbName.compareTo("db_37849031920750") > 0) {
+                if(dbName.startsWith("db_") && dbName.compareTo("db_34628745819562") > 0) {
                     sb.append("drop database " + dbName + ";");
                 }
             }
@@ -161,7 +161,7 @@ public class JdbcTest {
 
     @Test
     public void delAllTableTest() {
-        JDBC jdbc = new JDBC("jdbc:mysql://118.123.12.120:3306/erp?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
+        JDBC jdbc = new JDBC("jdbc:mysql://192.168.1.96:3306/db_60221565991851?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
 //        JDBC jdbc = new JDBC("jdbc:mysql://localhost:3306/base?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
         String sql ="show tables;";
         jdbc.setSql(sql);

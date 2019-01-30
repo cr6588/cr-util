@@ -32,7 +32,7 @@
     <!-- 新增行程 -->
     <http id="addRoute">
     <!--     params对应网站参数 -->
-        <params >
+        <params>
             <param key="product[mode]" value="1"/>
             <param key="product[price_tpl][0]" value="成人"/>
             <param key="product[price_tpl][1]" value="儿童"/>

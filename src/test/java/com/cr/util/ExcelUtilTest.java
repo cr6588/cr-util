@@ -31,6 +31,51 @@ public class ExcelUtilTest {
         return false;
     }
 
+    @Test
+    public void createWinitByExcel() {
+        InputStream is = null;
+        try {
+            boolean isPrintZhClassName = true;  //是否打印中文表名，类名
+            String excelPath = this.getClass().getResource("").getPath() + "data/万邑通.xls";
+            is = new FileInputStream(excelPath);
+            POIFSFileSystem fs = new POIFSFileSystem(is);
+            HSSFWorkbook wb = new HSSFWorkbook(fs);
+            int sheetCount = wb.getNumberOfSheets();
+            String[] logName = { "中邮小包+国家码" };
+            List<String> existTable = new ArrayList<>();
+            Map<String, String> existTableName = new HashMap<>();
+            for (int i = 0; i < sheetCount; i++) {
+                HSSFSheet sheet = wb.getSheetAt(i);
+                String sheetName = sheet.getSheetName();
+                if (exist(sheetName, logName)) {
+                    existTable.add(sheetName);
+                    int rowNum = sheet.getPhysicalNumberOfRows();
+                    String sql = "";
+                    String tableName = "";
+                    String primary = "";
+                    String rowSQL = "";
+                    for (int j = 1; j < rowNum; j++) {
+                        HSSFRow row = sheet.getRow(j);
+                        if (row != null) {
+                            String code = row.getCell(3).getStringCellValue().trim();
+                            Double numCode = row.getCell(4).getNumericCellValue();
+                            Double sortCode = row.getCell(5).getNumericCellValue();
+                            System.out.println((code + "(\"" + code  + "\", \"" + numCode + "\", " + sortCode + "), ").replace(".0", ""));
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
      * 从excel文件生成sql，目前只支持xls文件即excel97-2003
      */
@@ -44,7 +89,7 @@ public class ExcelUtilTest {
             POIFSFileSystem fs = new POIFSFileSystem(is);
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             int sheetCount = wb.getNumberOfSheets();
-            String[] logName = { "常用操作" };
+            String[] logName = { "采集商品表" };
             List<String> existTable = new ArrayList<>();
             Map<String, String> existTableName = new HashMap<>();
             for (int i = 0; i < sheetCount; i++) {
