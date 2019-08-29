@@ -62,7 +62,7 @@ public class HttpClientUtil {
         // 创建HttpClientBuilder类，就是CloseableHttpClient的配置器
         try {
             client = HttpClients.custom().setSSLSocketFactory(createSSLClientDefault()).setDefaultCookieStore(cookieStore).setDefaultRequestConfig(requestConfig)
-                .setMaxConnTotal(200).setMaxConnPerRoute(200).build();
+                .setMaxConnTotal(1000).setMaxConnPerRoute(1000).build();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }
