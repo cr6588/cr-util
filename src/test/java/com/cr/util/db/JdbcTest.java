@@ -122,7 +122,7 @@ public class JdbcTest {
             StringBuilder sb = new StringBuilder();
             while (rs.next()) {
                 String dbName = rs.getString(1);
-                if(dbName.startsWith("db_") && dbName.compareTo("db_34628745819562") > 0) {
+                if(dbName.startsWith("erp")) {
                     sb.append("drop database " + dbName + ";");
                 }
             }
@@ -161,7 +161,9 @@ public class JdbcTest {
 
     @Test
     public void delAllTableTest() {
-        JDBC jdbc = new JDBC("jdbc:mysql://192.168.1.96:3306/db_60221565991851?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
+        String[] dbins = {"50845485686899","50845486247027","50845486303347","50845486775411","50845486995571","50845487445107"};
+        String[] tableId = {"401596082512435","401596092113459","401596092449331","401596100379187","401596103959091","401596110791219"};
+        JDBC jdbc = new JDBC("jdbc:mysql://114.115.139.202:8635/saturn?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "saturn", "x1!1Cbdc20X16240");
 //        JDBC jdbc = new JDBC("jdbc:mysql://localhost:3306/base?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
         String sql ="show tables;";
         jdbc.setSql(sql);
@@ -171,8 +173,15 @@ public class JdbcTest {
             StringBuilder sb = new StringBuilder();
             while (rs.next()) {
                 String tableName = rs.getString(1);
-                sb.append("drop table " + tableName + ";");
+//                for(String t : tableId) {
+//                    if(tableName.endsWith(t)) {
+                        System.out.println(tableName);
+                        sb.append("drop table " + tableName + ";");
+//                        break;
+//                    }
+//                }
             }
+            System.out.println(sb);
             pst.execute(sb.toString());
         } catch (Exception e) {
             // TODO Auto-generated catch block

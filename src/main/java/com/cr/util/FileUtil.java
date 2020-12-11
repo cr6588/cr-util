@@ -8,6 +8,10 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -183,13 +187,14 @@ public class FileUtil {
 
     /**
      * 文件后缀过滤
-     *
      */
     static class FileSuffixFilter implements FilenameFilter {
         private String suffix;
+
         FileSuffixFilter(String suffix) {
             this.suffix = suffix;
         }
+
         @Override
         public boolean accept(File dir, String name) {
             return name.endsWith(suffix);
@@ -206,7 +211,7 @@ public class FileUtil {
         File[] files = new File(path).listFiles(new FileSuffixFilter(suffix));
         List<File> listFile = new ArrayList<File>();
         for (File file : files) {
-            if(file.isFile()) {
+            if (file.isFile()) {
                 listFile.add(file);
             } else if (file.isDirectory()) {
                 listFile.addAll(getFilesBySuffix(file.getPath(), suffix));
@@ -231,9 +236,9 @@ public class FileUtil {
         }
         Enumeration<JarEntry> Enumeration = xmlFile.entries();
         List<JarEntry> jarEntries = new ArrayList<JarEntry>();
-        for (;Enumeration.hasMoreElements();) {
+        for (; Enumeration.hasMoreElements();) {
             JarEntry entry = Enumeration.nextElement();
-            if(entry.getName().endsWith(suffix)) {
+            if (entry.getName().endsWith(suffix)) {
                 jarEntries.add(entry);
             }
         }
@@ -255,23 +260,44 @@ public class FileUtil {
     }
 
     public static boolean deleteFileDir(File file) throws Exception {
-        if(!file.exists()) {
-            throw new Exception( file.getName() + " not found!");
+        if (!file.exists()) {
+            throw new Exception(file.getName() + " not found!");
         }
-        
-        //Deletes the file or directory denoted by this abstract pathname.
-        //If this pathname denotes a directory, then the directory must be empty in order to be deleted.
+
+        // Deletes the file or directory denoted by this abstract pathname.
+        // If this pathname denotes a directory, then the directory must be
+        // empty in order to be deleted.
         File[] files = file.listFiles();
-        //Arrays.asList()返回的是Arrays中的内部类ArrayList，ArrayList继承AbstractList,AbstractList中的add方法会直接抛出异常
+        // Arrays.asList()返回的是Arrays中的内部类ArrayList，ArrayList继承AbstractList,AbstractList中的add方法会直接抛出异常
         for (File f : files) {
-            if(f.isDirectory()) {
+            if (f.isDirectory()) {
                 deleteFileDir(f);
             } else {
-                if(!f.delete()) {
-                    return false; //有一个文件没有删除成功就返回
+                if (!f.delete()) {
+                    return false; // 有一个文件没有删除成功就返回
                 }
             }
         }
         return file.delete();
+    }
+    
+    public static void main(String[] args) {
+        List<String> str = readAllLines();
+        for (String string : str) {
+            System.out.println(string);
+        }
+    }
+
+    public static List<String> readAllLines() {
+//        Path path = Paths.get("D:\\git\\cr-util\\src\\main\\java\\com\\cr\\util\\FileUtil.java") ;
+        Path path = Paths.get("D:\\aaaa.txt") ;
+        try {
+            List<String> str = Files.readAllLines(path, Charset.forName("UTF-8"));
+            return str;
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 }

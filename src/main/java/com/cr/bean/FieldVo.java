@@ -6,7 +6,6 @@ import com.cr.annotation.required;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * create in 2017年05月06日
@@ -14,7 +13,6 @@ import lombok.NoArgsConstructor;
  * @author chenyi
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class FieldVo {
     @required

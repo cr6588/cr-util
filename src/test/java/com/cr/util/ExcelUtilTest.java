@@ -89,7 +89,7 @@ public class ExcelUtilTest {
             POIFSFileSystem fs = new POIFSFileSystem(is);
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             int sheetCount = wb.getNumberOfSheets();
-            String[] logName = { "采集商品表" };
+            String[] logName = { "平台运输方式" };
             List<String> existTable = new ArrayList<>();
             Map<String, String> existTableName = new HashMap<>();
             for (int i = 0; i < sheetCount; i++) {
@@ -110,7 +110,7 @@ public class ExcelUtilTest {
                                 HSSFCell cell = row.getCell(k);
                                 if (cell != null) {
                                     String cellValue = cell.getStringCellValue();
-                                    if(tableName.equals("")) {
+                                    if(tableName.equals("") && !StringUtil.isBlank(cellValue)) {
                                         if(existTableName.get(cellValue) != null) {
                                             throw new Exception("当前表" + sheetName + ":" + cellValue + "与" + existTableName.get(cellValue) + "的数据库表名" + cellValue + "名称一样，请检查！");
                                         }

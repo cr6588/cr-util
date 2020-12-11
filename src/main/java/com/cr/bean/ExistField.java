@@ -2,15 +2,14 @@ package com.cr.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * create in 2017年05月06日
  * @category 
  * @author chenyi
  */
+
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class ExistField {
     private Long id;

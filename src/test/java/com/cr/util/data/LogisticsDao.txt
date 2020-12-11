@@ -1,35 +1,40 @@
-
     /**
-     * 查询物流公司列表
+     * 查询交接单列表
      * @param param 查询条件
      * @param pager 分页条件，无需分页null
      * @return
      */
-    List<PubLogisticsCompany> getPubLogisticsCompanyList(Map<String, Object> param, PagerInfo pager);
+    List<PubHandover> getPubHandoverList(Map<String, Object> param, PagerInfo pager);
 
     /**
-     * 查询物流公司
+     * 查询交接单
      * @param param 查询条件
      * @return
      */
-    PubLogisticsCompany getPubLogisticsCompany(Map<String, Object> param);
+    PubHandover getPubHandover(Map<String, Object> param);
 
     /**
-     * 增加物流公司
-     * @param pubLogisticsCompany 物流公司
+     * 增加交接单
+     * @param pubHandover 交接单
      * @return
      */
-    void savePubLogisticsCompany(PubLogisticsCompany pubLogisticsCompany);
+    void savePubHandover(PubHandover pubHandover);
 
     /**
-     * 修改物流公司
-     * @param pubLogisticsCompany 物流公司
+     * 修改交接单
+     * @param pubHandover 交接单
      */
-    void updatePubLogisticsCompany(PubLogisticsCompany pubLogisticsCompany);
+    void updatePubHandover(PubHandover pubHandover);
 
     /**
-     * 删除物流公司
+     * 修改交接单，非空字段
+     * @param pubHandover
+     */
+    void updatePubHandoverNoNull(PubHandover pubHandover);
+
+    /**
+     * 删除交接单
      * @param id
      */
-    void deletePubLogisticsCompany(long id);
+    void deletePubHandover(Map<String, Object> param);
 

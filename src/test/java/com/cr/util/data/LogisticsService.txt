@@ -1,66 +1,75 @@
     /**
-     * 查询物流公司列表
+     * 查询交接单列表
      * @param param 查询条件
      * @param pager 分页条件，无需分页null
      * @return
      */
-    List<PubLogisticsCompany> getPubLogisticsCompanyList(Map<String, Object> param, PagerInfo pager);
+    List<PubHandover> getPubHandoverList(Map<String, Object> param, PagerInfo pager);
 
     /**
-     * 查询物流公司
+     * 查询交接单
      * @param param 查询条件
      * @return
      */
-    PubLogisticsCompany getPubLogisticsCompany(Map<String, Object> param);
+    PubHandover getPubHandover(Map<String, Object> param);
 
     /**
-     * 增加物流公司
-     * @param pubLogisticsCompany 物流公司
+     * 增加交接单
+     * @param pubHandover 交接单
      * @return
      */
-    Long savePubLogisticsCompany(PubLogisticsCompany pubLogisticsCompany);
+    Long savePubHandover(PubHandover pubHandover);
 
     /**
-     * 修改物流公司
-     * @param pubLogisticsCompany 物流公司
+     * 修改交接单
+     * @param pubHandover 交接单
      */
-    void updatePubLogisticsCompany(PubLogisticsCompany pubLogisticsCompany);
+    void updatePubHandover(PubHandover pubHandover);
 
     /**
-     * 删除物流公司
-     * @param comId 删除条件
+     * 修改交接单，非空字段
+     * @param pubHandover
+     */
+    void updatePubHandoverNoNull(PubHandover pubHandover);
+
+    /**
+     * 删除交接单
      * @param id
      */
-    void deletePubLogisticsCompany(Long comId, Long id);
+    void deletePubHandover(Map<String, Object> param);
 
-
+    @Autowired
+    private HandoverDao handoverDao;
 
     @Override
-    public List<PubLogisticsCompany> getPubLogisticsCompanyList(Map<String, Object> param, PagerInfo pager) {
-        return logisticsDao.getPubLogisticsCompanyList(param, pager);
+    public List<PubHandover> getPubHandoverList(Map<String, Object> param, PagerInfo pager) {
+        return handoverDao.getPubHandoverList(param, pager);
     }
 
     @Override
-    public PubLogisticsCompany getPubLogisticsCompany(Map<String, Object> param) {
-        return logisticsDao.getPubLogisticsCompany(param);
+    public PubHandover getPubHandover(Map<String, Object> param) {
+        return handoverDao.getPubHandover(param);
     }
 
     @Override
-    public Long savePubLogisticsCompany(PubLogisticsCompany pubLogisticsCompany) {
-        pubLogisticsCompany.setId(IdGeneratorUtils.generateId());
-        logisticsDao.savePubLogisticsCompany(pubLogisticsCompany);
-        return pubLogisticsCompany.getId();
+    public Long savePubHandover(PubHandover pubHandover) {
+        pubHandover.setId(IdGeneratorUtils.generateId());
+        handoverDao.savePubHandover(pubHandover);
+        return pubHandover.getId();
     }
 
     @Override
-    public void updatePubLogisticsCompany(PubLogisticsCompany pubLogisticsCompany) {
-        logisticsDao.updatePubLogisticsCompany(pubLogisticsCompany);
+    public void updatePubHandover(PubHandover pubHandover) {
+        handoverDao.updatePubHandover(pubHandover);
     }
 
     @Override
-    public void deletePubLogisticsCompany(Long comId, Long id) {
-        Map<String, Object> param = new HashMap<>();
-        param.put(ConstBusiness.COM_ID, comId);
-        param.put(ConstBusiness.ID, id);
-        logisticsDao.deletePubLogisticsCompany(param);
+    public void updatePubHandoverNoNull(PubHandover pubHandover) {
+        handoverDao.updatePubHandoverNoNull(pubHandover);
     }
+
+    @Override
+    public void deletePubHandover(Map<String, Object> param) {
+        handoverDao.deletePubHandover(param);
+    }
+

@@ -4,7 +4,6 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * create in 2017年05月06日
@@ -12,7 +11,6 @@ import lombok.NoArgsConstructor;
  * @author chenyi
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class FieldMappingJSON {
     long id;

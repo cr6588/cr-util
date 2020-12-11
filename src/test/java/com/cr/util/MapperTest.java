@@ -11,6 +11,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -26,15 +29,17 @@ import org.junit.Test;
  */
 public class MapperTest {
 
-    private static final String beanName = "PubCollectProduct";
-    private static final String beanCnName = "采集商品";
+    private static final String beanName = "PubPlatTransportMode";
+    private static final String beanCnName = "平台运输方式";
     private static final boolean isNeedComId = true;
-    private static final boolean isNeedDeleted = false;
+    private static final boolean isNeedDeleted = true;
+    private static final boolean isNeedUpdateNoNull = true;//是否需要update 字段非空时的修改
+    private static final Set<String> updateIgnoreFields = Stream.of("id", "comId", "createTime", "createUser").collect(Collectors.toSet());
     @Test
     public void test() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://mysql.cr6588.com:3306/test?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
+            Connection con = DriverManager.getConnection("jdbc:mysql://user.mysql.jtongi.cn:31111/test?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
             String sql = "show tables;";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -119,7 +124,7 @@ public class MapperTest {
 
     private String createMapperDao(String beanDesc, String beanName) {
         String daoExample = FileUtil.readTxtFile2StrByStringBuilder(this.getClass().getResource("").getPath() + "/data/LogisticsDao.txt");
-        String daoStr = daoExample.replace("物流公司", beanDesc).replace("PubLogisticsCompany", beanName).replaceAll("pubLogisticsCompany", beanName.toLowerCase().charAt(0) + beanName.substring(1));
+        String daoStr = daoExample.replace("交接单", beanDesc).replace("PubHandover", beanName).replaceAll("pubHandover", beanName.toLowerCase().charAt(0) + beanName.substring(1));
         return daoStr;
     }
 
@@ -130,24 +135,24 @@ public class MapperTest {
 
     private String createService(String beanDesc, String beanName, String serviceName) {
         String daoExample = FileUtil.readTxtFile2StrByStringBuilder(this.getClass().getResource("").getPath() + "/data/LogisticsService.txt");
-        String daoStr = daoExample.replace("物流公司", beanDesc).replace("PubLogisticsCompany", beanName).replaceAll("pubLogisticsCompany", beanName.toLowerCase().charAt(0) + beanName.substring(1));
-        return daoStr.replace("logisticsDao", serviceName);
+        String daoStr = daoExample.replace("交接单", beanDesc).replace("PubHandover", beanName).replaceAll("pubHandover", beanName.toLowerCase().charAt(0) + beanName.substring(1));
+        return daoStr.replace("HandoverDao", serviceName).replace("handoverDao", serviceName.substring(0, 1).toLowerCase() + serviceName.substring(1));
     }
 
     @Test
     public void createServiceTest() {
-        System.out.println(createService(beanCnName, beanName, "collectProductDao"));
+        System.out.println(createService(beanCnName, beanName, "ProductDevelopmentDao"));
     }
 
     private String createFacade(String beanDesc, String beanName, String serviceName) {
         String daoExample = FileUtil.readTxtFile2StrByStringBuilder(this.getClass().getResource("").getPath() + "/data/LogisticsFacade.txt");
-        String daoStr = daoExample.replace("物流公司", beanDesc).replace("PubLogisticsCompany", beanName).replaceAll("pubLogisticsCompany", beanName.toLowerCase().charAt(0) + beanName.substring(1));
-        return daoStr.replace("logisticsSer", serviceName);
+        String daoStr = daoExample.replace("交接单", beanDesc).replace("PubHandover", beanName).replaceAll("pubHandover", beanName.toLowerCase().charAt(0) + beanName.substring(1));
+        return daoStr.replace("HandoverService", serviceName).replace("handoverService", serviceName.substring(0, 1).toLowerCase() + serviceName.substring(1));
     }
 
     @Test
     public void createFacadeTest() {
-        System.out.println(createFacade(beanCnName, beanName, "userService"));
+        System.out.println(createFacade(beanCnName, beanName, "ProductDevelopmentService"));
     }
 
     public String getClassNameByTableName(String tableName) {
@@ -186,7 +191,10 @@ public class MapperTest {
             mapperXML += createResultMapXml(classNameLowerCaseFirstWord, entry.getValue());
             mapperXML += createColumnListXml(classNameLowerCaseFirstWord, entry.getValue());
             mapperXML += createAddXml(className, classNameLowerCaseFirstWord, tableName, entry.getValue());
-            mapperXML += createUpdXml(className, classNameLowerCaseFirstWord, tableName, entry.getValue());
+            mapperXML += createUpdXml(className, classNameLowerCaseFirstWord, tableName, entry.getValue(), false);
+            if(isNeedUpdateNoNull) {
+                mapperXML += createUpdXml(className, classNameLowerCaseFirstWord, tableName, entry.getValue(), true);
+            }
             mapperXML += createDelXml(className, tableName);
             mapperXML += createSelectConditionXml(classNameLowerCaseFirstWord, entry.getValue());
             mapperXML += createSelectXml(className, classNameLowerCaseFirstWord, tableName);
@@ -307,27 +315,27 @@ public class MapperTest {
      * @param classNameLowerCaseFirstWord
      * @param tableName
      * @param columns
+     * @param judegeFieldNull TODO
      * @return
      */
-    private String createUpdXml(String className, String classNameLowerCaseFirstWord, String tableName, List<String> columns) {
+    private String createUpdXml(String className, String classNameLowerCaseFirstWord, String tableName, List<String> columns, boolean judegeFieldNull) {
         String str = "";
-        str += "    <update id=\"update" + className + "\" parameterType=\"" + classNameLowerCaseFirstWord + "\" >" + enter;
+        str += "    <update id=\"update" + className + (judegeFieldNull ? "NoNull" : "") + "\" parameterType=\""
+            + classNameLowerCaseFirstWord + "\" >" + enter;
         str += "        update `" + tableName + "`" + enter;
-        str += "        set ";
+        str += "        <set>" + enter;
         for (int i = 0; i < columns.size(); i++) {
             String column = columns.get(i);
-            if (!column.equals("id")) {
-                if (i == 1) {
-                    str += "`" + column + "` = #{" + column + "}";
+            if (!updateIgnoreFields.contains(column)) {
+                if(judegeFieldNull) {
+                    str += String.format("            <if test=\"%s != null\">`%s` = #{%s},</if>", column, column, column);
                 } else {
-                    str += "            `" + column + "` = #{" + column + "}";
-                }
-                if (i != columns.size() - 1) {
-                    str += ",";
+                    str += String.format("            `%s` = #{%s},", column, column);
                 }
                 str += enter;
             }
         }
+        str += "        </set>" + enter;
         str += "        where id = #{id}" + getComIdStr() + enter;
         str += "    </update>" + enter;
         return str;

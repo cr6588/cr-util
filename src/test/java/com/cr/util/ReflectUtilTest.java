@@ -45,9 +45,9 @@ public class ReflectUtilTest {
 
     @Test
     public void test() throws Exception {
-        ExistField field  = new ExistField();
-        setAddObjTestField(field, "ss");
-        System.out.println(JSON.toJSONString(field));
+//        ExistField field  = new ExistField();
+//        setAddObjTestField(field, "ss");
+//        System.out.println(JSON.toJSONString(field));
     }
 
 }

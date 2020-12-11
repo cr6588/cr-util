@@ -1,81 +1,76 @@
     /**
-     * 查询物流公司列表
+     * 查询交接单列表
      * @param param 查询条件
      * @param pager 分页条件，无需分页null
      * @return
      */
-    ResultParamVo<List<PubLogisticsCompany>, PagerInfo> getPubLogisticsCompanyList(Map<String, Object> param, PagerInfo pager);
+    ResultParamVo<List<PubHandover>, PagerInfo> getPubHandoverList(Map<String, Object> param, PagerInfo pager);
 
     /**
-     * 查询物流公司
+     * 查询交接单
      * @param param 查询条件
      * @return
      */
-    PubLogisticsCompany getPubLogisticsCompany(Map<String, Object> param);
+    PubHandover getPubHandover(Map<String, Object> param);
 
     /**
-     * 增加物流公司
-     * @param pubLogisticsCompany 物流公司
+     * 增加交接单
+     * @param pubHandover 交接单
      */
-    void savePubLogisticsCompany(PubLogisticsCompany pubLogisticsCompany);
+    Long savePubHandover(PubHandover pubHandover);
 
     /**
-     * 修改物流公司
-     * @param pubLogisticsCompany 物流公司
+     * 修改交接单
+     * @param pubHandover 交接单
      */
-    void updatePubLogisticsCompany(PubLogisticsCompany pubLogisticsCompany);
+    void updatePubHandover(PubHandover pubHandover);
 
     /**
-     * 删除物流公司
+     * 修改交接单，非空字段
+     * @param pubHandover
+     */
+    void updatePubHandoverNoNull(PubHandover pubHandover);
+
+    /**
+     * 删除交接单
      * @param id
      */
-    void deletePubLogisticsCompany(Long id, Long comId);
+    void deletePubHandover(Long id, Long comId);
+
+    @Autowired
+    private HandoverService handoverService;
 
     @Override
-    public ResultParamVo<List<PubLogisticsCompany>, PagerInfo> getPubLogisticsCompanyList(Map<String, Object> param,
+    public ResultParamVo<List<PubHandover>, PagerInfo> getPubHandoverList(Map<String, Object> param,
         PagerInfo pager) {
-        List<PubLogisticsCompany> list = logisticsSer.getPubLogisticsCompanyList(param, pager);
+        List<PubHandover> list = handoverService.getPubHandoverList(param, pager);
         return new ResultParamVo<>(list, pager);
     }
 
     @Override
-    public PubLogisticsCompany getPubLogisticsCompany(Long comId, Long id) {
-        return logisticsSer.getPubLogisticsCompany(comId, id);
+    public Long savePubHandover(PubHandover pubHandover) {
+        return handoverService.savePubHandover(pubHandover);
     }
 
     @Override
-    public void savePubLogisticsCompany(PubLogisticsCompany pubLogisticsCompany) {
-        logisticsSer.savePubLogisticsCompany(pubLogisticsCompany);
-        logFacade.addSaveLog(pubLogisticsCompany);
+    public void updatePubHandover(PubHandover pubHandover) {
+        handoverService.updatePubHandover(pubHandover);
     }
 
     @Override
-    public void updatePubLogisticsCompany(PubLogisticsCompany pubLogisticsCompany) {
-        PubLogisticsCompany oldCompany = getPubLogisticsCompany(pubLogisticsCompany.getComId(),
-            pubLogisticsCompany.getId());
-        logisticsSer.updatePubLogisticsCompany(pubLogisticsCompany);
-        logFacade.addUpdateLog(oldCompany, pubLogisticsCompany);
+    public void updatePubHandoverNoNull(PubHandover pubHandover) {
+        handoverService.updatePubHandoverNoNull(pubHandover);
     }
 
     @Override
-    public void deletePubLogisticsCompany(Long id, Long comId, List<PubLogisticsChannel> channels) {
-        PubLogisticsCompany oldCompany = getPubLogisticsCompany(comId, id);
-        logisticsSer.deletePubLogisticsCompany(comId, id);
-        if (PlatformUtils.isNotEmpty(channels)) {
-            for (PubLogisticsChannel channel : channels) {
-                isNotChannelUsed(comId, channel.getId());
-                logisticsSer.deletePubLogisticsChannel(comId, channel.getId());
-            }
-            for (PubLogisticsChannel channel : channels) {
-                logFacade.addDeleteLog(channel);
-            }
-        }
-        logFacade.addDeleteLog(oldCompany);
+    public void deletePubHandover(Long id, Long comId) {
+        Map<String, Object> param = new HashMap<>();
+        param.put(ConstBusiness.COM_ID, comId);
+        param.put(ConstBusiness.ID, id);
+        handoverService.deletePubHandover(param);
     }
 
-
-
     @Override
-    public PubLogisticsCompany getPubLogisticsCompany(Map<String, Object> param) {
-        return logisticsSer.getPubLogisticsCompany(param);
+    public PubHandover getPubHandover(Map<String, Object> param) {
+        return handoverService.getPubHandover(param);
     }
