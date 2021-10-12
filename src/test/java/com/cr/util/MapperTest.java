@@ -29,10 +29,10 @@ import org.junit.Test;
  */
 public class MapperTest {
 
-    private static final String beanName = "PubPlatTransportMode";
-    private static final String beanCnName = "平台运输方式";
+    private static final String beanName = "PubCollectRule";
+    private static final String beanCnName = "采集规则";
     private static final boolean isNeedComId = true;
-    private static final boolean isNeedDeleted = true;
+    private static final boolean isNeedDeleted = false;
     private static final boolean isNeedUpdateNoNull = true;//是否需要update 字段非空时的修改
     private static final Set<String> updateIgnoreFields = Stream.of("id", "comId", "createTime", "createUser").collect(Collectors.toSet());
     @Test
@@ -141,7 +141,7 @@ public class MapperTest {
 
     @Test
     public void createServiceTest() {
-        System.out.println(createService(beanCnName, beanName, "ProductDevelopmentDao"));
+        System.out.println(createService(beanCnName, beanName, "CollectRuleDao"));
     }
 
     private String createFacade(String beanDesc, String beanName, String serviceName) {
@@ -152,7 +152,7 @@ public class MapperTest {
 
     @Test
     public void createFacadeTest() {
-        System.out.println(createFacade(beanCnName, beanName, "ProductDevelopmentService"));
+        System.out.println(createFacade(beanCnName, beanName, "CollectRuleService"));
     }
 
     public String getClassNameByTableName(String tableName) {
