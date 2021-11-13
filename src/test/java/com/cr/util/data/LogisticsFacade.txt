@@ -20,6 +20,13 @@
     Long savePubHandover(PubHandover pubHandover);
 
     /**
+     * 批量增加交接单
+     * @param pubHandover 交接单
+     * @return
+     */
+    void batchSavePubHandover(List<PubHandover> list);
+
+    /**
      * 修改交接单
      * @param pubHandover 交接单
      */
@@ -53,6 +60,11 @@
     }
 
     @Override
+    public void batchSavePubHandover(List<PubHandover> list) {
+        handoverService.batchSavePubHandover(list);
+    }
+
+    @Override
     public void updatePubHandover(PubHandover pubHandover) {
         handoverService.updatePubHandover(pubHandover);
     }
@@ -64,6 +76,9 @@
 
     @Override
     public void deletePubHandover(Long id, Long comId) {
+        if(id == null || comId == null) {
+            return;
+        }
         Map<String, Object> param = new HashMap<>();
         param.put(ConstBusiness.COM_ID, comId);
         param.put(ConstBusiness.ID, id);

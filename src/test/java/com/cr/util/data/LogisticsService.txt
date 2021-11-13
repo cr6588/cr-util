@@ -21,6 +21,13 @@
     Long savePubHandover(PubHandover pubHandover);
 
     /**
+     * 批量增加交接单
+     * @param pubHandover 交接单
+     * @return
+     */
+    void batchSavePubHandover(List<PubHandover> list);
+
+    /**
      * 修改交接单
      * @param pubHandover 交接单
      */
@@ -53,9 +60,24 @@
 
     @Override
     public Long savePubHandover(PubHandover pubHandover) {
-        pubHandover.setId(IdGeneratorUtils.generateId());
+        if (!PlatformUtils.greaterThanZero(pubHandover.getId())) {
+            pubHandover.setId(IdGeneratorUtils.generateId());
+        }
         handoverDao.savePubHandover(pubHandover);
         return pubHandover.getId();
+    }
+
+    @Override
+    public void batchSavePubHandover(List<PubHandover> list) {
+        if (PlatformUtils.isEmpty(list)) {
+            return;
+        }
+        list.forEach(r -> {
+            if (!PlatformUtils.greaterThanZero(r.getId())) {
+                r.setId(IdGeneratorUtils.generateId());
+            }
+        });
+        handoverDao.batchSavePubHandover(list);
     }
 
     @Override

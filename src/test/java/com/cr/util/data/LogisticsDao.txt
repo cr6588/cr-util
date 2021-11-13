@@ -21,6 +21,13 @@
     void savePubHandover(PubHandover pubHandover);
 
     /**
+     * 批量增加交接单
+     * @param list 交接单
+     * @return
+     */
+    void batchSavePubHandover(List<PubHandover> list);
+
+    /**
      * 修改交接单
      * @param pubHandover 交接单
      */

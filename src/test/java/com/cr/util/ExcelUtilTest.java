@@ -83,13 +83,13 @@ public class ExcelUtilTest {
     public void createSQLByExcel() {
         InputStream is = null;
         try {
-            boolean isPrintZhClassName = true;  //是否打印中文表名，类名
+            boolean isPrintZhClassName = false;  //是否打印中文表名，类名
             String excelPath = this.getClass().getResource("").getPath() + "data/表设计.xls";
             is = new FileInputStream(excelPath);
             POIFSFileSystem fs = new POIFSFileSystem(is);
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             int sheetCount = wb.getNumberOfSheets();
-            String[] logName = { "采集规则" };
+            String[] logName = { "刊登产品表", "刊登产品属性表", "刊登产品区域价格表" };
             List<String> existTable = new ArrayList<>();
             Map<String, String> existTableName = new HashMap<>();
             for (int i = 0; i < sheetCount; i++) {
@@ -158,7 +158,11 @@ public class ExcelUtilTest {
                                 if(!isPrimary.trim().equals("")) {
                                     primary = columnName;
                                 }
-                                rowSQL += "    `" + columnName + "`" + " " + type + " " + length + " " + notNull + " "+ defaultValue + " " + comment + ", \n";
+                                String unsigned = " ";
+                                if ("bigint".equals(type) || "tinyint".equals(type) || "int".equals(type)) {
+                                    unsigned =" unsigned ";
+                                }
+                                rowSQL += "    `" + columnName + "`" + " " + type + " " + length + unsigned + notNull + " "+ defaultValue + " " + comment + ", \n";
                             }
                         }
                     }

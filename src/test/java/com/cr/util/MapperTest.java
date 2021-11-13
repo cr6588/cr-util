@@ -29,17 +29,18 @@ import org.junit.Test;
  */
 public class MapperTest {
 
-    private static final String beanName = "PubCollectRule";
-    private static final String beanCnName = "采集规则";
+    private static final String[] beanNames = { "PubListingProduct", "PubListingProductRegionPrice", "PubListingProductProperty" };
+    private static final String[] beanCnNames = { "刊登产品", "刊登产品区域价格", "刊登产品属性" };
     private static final boolean isNeedComId = true;
-    private static final boolean isNeedDeleted = false;
-    private static final boolean isNeedUpdateNoNull = true;//是否需要update 字段非空时的修改
+    private static final boolean isNeedDeleted = true;
+    private static final boolean isNeedUpdateNoNull = true;//xml中是否需要update 字段非空时的修改
+    private static final boolean isNeedBatchSave = true;//xml中是否需要批量插入
     private static final Set<String> updateIgnoreFields = Stream.of("id", "comId", "createTime", "createUser").collect(Collectors.toSet());
     @Test
     public void test() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://user.mysql.jtongi.cn:31111/test?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf212");
+            Connection con = DriverManager.getConnection("jdbc:mysql://user.mysql.jtongi.cn:31111/test?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8", "root", "tTdAdf2129");
             String sql = "show tables;";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -130,7 +131,11 @@ public class MapperTest {
 
     @Test
     public void createMapperDaoTest() {
-        System.out.println(createMapperDao(beanCnName, beanName));
+        for (int i = 0; i < beanCnNames.length; i++) {
+            String beanCnName = beanCnNames[i];
+            String beanName = beanNames[i];
+            System.out.println(createMapperDao(beanCnName, beanName));
+        }
     }
 
     private String createService(String beanDesc, String beanName, String serviceName) {
@@ -141,7 +146,11 @@ public class MapperTest {
 
     @Test
     public void createServiceTest() {
-        System.out.println(createService(beanCnName, beanName, "CollectRuleDao"));
+        for (int i = 0; i < beanCnNames.length; i++) {
+            String beanCnName = beanCnNames[i];
+            String beanName = beanNames[i];
+            System.out.println(createService(beanCnName, beanName, "ListingDao"));
+        }
     }
 
     private String createFacade(String beanDesc, String beanName, String serviceName) {
@@ -152,7 +161,11 @@ public class MapperTest {
 
     @Test
     public void createFacadeTest() {
-        System.out.println(createFacade(beanCnName, beanName, "CollectRuleService"));
+        for (int i = 0; i < beanCnNames.length; i++) {
+            String beanCnName = beanCnNames[i];
+            String beanName = beanNames[i];
+            System.out.println(createFacade(beanCnName, beanName, "ListingService"));
+        }
     }
 
     public String getClassNameByTableName(String tableName) {
@@ -190,6 +203,9 @@ public class MapperTest {
             mapperXML += "    <!--     " + className + " start -->" + enter;
             mapperXML += createResultMapXml(classNameLowerCaseFirstWord, entry.getValue());
             mapperXML += createColumnListXml(classNameLowerCaseFirstWord, entry.getValue());
+            if (isNeedBatchSave) {
+                mapperXML += createBatchSaveXml(className, classNameLowerCaseFirstWord, tableName, entry.getValue());    
+            }
             mapperXML += createAddXml(className, classNameLowerCaseFirstWord, tableName, entry.getValue());
             mapperXML += createUpdXml(className, classNameLowerCaseFirstWord, tableName, entry.getValue(), false);
             if(isNeedUpdateNoNull) {
@@ -338,6 +354,44 @@ public class MapperTest {
         str += "        </set>" + enter;
         str += "        where id = #{id}" + getComIdStr() + enter;
         str += "    </update>" + enter;
+        return str;
+    }
+
+    /**
+     * 生成批量添加xml
+     * @param className
+     * @param classNameLowerCaseFirstWord
+     * @param tableName
+     * @param value
+     * @return
+     */
+    private String createBatchSaveXml(String className, String classNameLowerCaseFirstWord, String tableName, List<String> columes) {
+        String str = "";
+        str += "    <insert id=\"batchSave" + className + "\" parameterType=\"list\">" + enter;
+        str += "        insert into `" + tableName + "` (" + enter;
+        str += "            <include refid=\"" + classNameLowerCaseFirstWord + "ColumnList\"/>" + enter;
+        str += "        ) values" + enter;
+        str += "        <foreach collection=\"list\" separator=\",\" item=\"l\" >" + enter;
+        str += "            (" + enter;
+        for (int i = 0; i < columes.size(); i++) {
+            if (i % 3 == 0 && i != 0) {
+                str += enter;
+            }
+            if (i % 3 == 0) {
+                str += "                ";
+            }
+            str += " #{l." + columes.get(i) + "}";
+            if (i != columes.size() - 1) {
+                str += ",";
+            }
+        }
+        if(isNeedDeleted) {
+            str += ", ${@com.sjdf.erp.common.dictionary.bean.WhetherState@NO}";
+        }
+        str += enter;
+        str += "            )" + enter;
+        str += "        </foreach>" + enter;
+        str += "    </insert>" + enter;
         return str;
     }
 
