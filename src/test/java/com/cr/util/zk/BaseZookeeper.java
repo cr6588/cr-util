@@ -1,5 +1,8 @@
 package com.cr.util.zk;
 
+import static org.junit.Assert.*;
+
+import java.net.InetSocketAddress;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import org.apache.zookeeper.CreateMode;
@@ -10,6 +13,7 @@ import org.apache.zookeeper.Watcher.Event.KeeperState;
 import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
+import org.junit.Test;
 
 
 
@@ -136,12 +140,24 @@ public class BaseZookeeper implements Watcher{
    }
   
 
-    public static void main(String[] args) throws Exception {
-        BaseZookeeper zookeeper = new BaseZookeeper();
-        zookeeper.connectZookeeper("192.168.1.206:30679");
+   @Test
+   public void test() throws Exception {
+       BaseZookeeper zookeeper = new BaseZookeeper();
+       zookeeper.connectZookeeper("192.168.1.206:30679");
 
-        List<String> children = zookeeper.getChildren("/");
-        System.out.println(children);
-    }
+       List<String> children = zookeeper.getChildren("/");
+       System.out.println(children);
+   }
 
+   @Test
+   public void getHostNameTest() throws Exception {
+       // String ip = java.net.InetAddress.getLocalHost().getHostAddress();
+       // System.out.println(ip);
+       // ip = InetAddress.getByName("zookeeper.jtongi.cn").getHostAddress();
+       // System.out.println(ip);
+       InetSocketAddress t = new InetSocketAddress("192.168.1.206", 30679);
+       // InetAddress addr = new
+       // new InetSocketAddress(null, 0)
+       System.out.println(t.getHostName());
+   }
 }
