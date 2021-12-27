@@ -107,6 +107,11 @@
             <artifactId>lombok</artifactId>
             <version>1.16.16</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.3.6</version>
+         </dependency>
     </dependencies>
     <distributionManagement>
         <repository>
