@@ -29,11 +29,11 @@ import org.junit.Test;
  */
 public class MapperTest {
 
-    private static final String[] beanNames = { "PubListingProduct", "PubListingProductRegionPrice", "PubListingProductProperty" };
-    private static final String[] beanCnNames = { "刊登产品", "刊登产品区域价格", "刊登产品属性" };
-    private static final boolean isNeedComId = true;
-    private static final boolean isNeedDeleted = true;
-    private static final boolean isNeedUpdateNoNull = true;//xml中是否需要update 字段非空时的修改
+    private static final String[] beanNames = { "SysCategory", "SysCategoryAttr", "SysCategoryValue" };
+    private static final String[] beanCnNames = { "类目", "类目属性", "类目属性值" };
+    private static final boolean isNeedComId = false;
+    private static final boolean isNeedDeleted = false;
+    private static final boolean isNeedUpdateNoNull = false;//xml中是否需要update 字段非空时的修改
     private static final boolean isNeedBatchSave = true;//xml中是否需要批量插入
     private static final Set<String> updateIgnoreFields = Stream.of("id", "comId", "createTime", "createUser").collect(Collectors.toSet());
     @Test
@@ -149,7 +149,7 @@ public class MapperTest {
         for (int i = 0; i < beanCnNames.length; i++) {
             String beanCnName = beanCnNames[i];
             String beanName = beanNames[i];
-            System.out.println(createService(beanCnName, beanName, "ListingDao"));
+            System.out.println(createService(beanCnName, beanName, "SysCategoryDao"));
         }
     }
 
@@ -164,7 +164,7 @@ public class MapperTest {
         for (int i = 0; i < beanCnNames.length; i++) {
             String beanCnName = beanCnNames[i];
             String beanName = beanNames[i];
-            System.out.println(createFacade(beanCnName, beanName, "ListingService"));
+            System.out.println(createFacade(beanCnName, beanName, "SysCategoryService"));
         }
     }
 
